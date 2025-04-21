@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@source '../../../node_modules/reaxify';
+
+@utility container {
+  padding-inline: 1rem;
+  margin-inline: auto;
+}
+@theme {
+  --color-primary: #4f39f6;
+  --color-secondary: #e000ad;
+  --color-success: #17c653;
+  --color-info: #0084d1;
+  --color-warning: #f59200;
+  --color-danger: #f8285a;
+  --color-dark: #1e2129;
+  --color-light: #f8f9fa;
+  --color-background: #f8fafc;
+
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-150: #e9eef5;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cad5e2;
+  --color-gray-400: #90a1b9;
+  --color-gray-500: #62748e;
+  --color-gray-600: #45556c;
+  --color-gray-700: #314158;
+  --color-gray-800: #1d293d;
+  --color-gray-900: #0f172b;
+  --color-gray-950: #020618;
+
+  --shadow-soft: #919eab33 0px 0px 2px 0px, #919eab1f 0px 12px 24px -4px;
+
+  --default-transition-duration: 300ms;
+}
+
+html,
+body {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  @apply bg-background;
+}
