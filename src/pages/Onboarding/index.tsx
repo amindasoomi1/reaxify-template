@@ -90,22 +90,20 @@ export default function Onboarding() {
       <Layout.Body className="min-h-(--main-height) flex flex-col">
         <Card as={Form} onSubmit={submit} className="max-w-md m-auto">
           <Card.Header className="text-center">
-            <Typography variant="heading-3" className="mb-5">
-              {activeStep.title}
-            </Typography>
+            <Typography variant="heading-6">{activeStep.title}</Typography>
           </Card.Header>
           <OnboardingContext.Provider value={{ data, setData, handleSetData }}>
             <ActiveStepComponent />
           </OnboardingContext.Provider>
-          <Card.Footer>
+          <Card.Footer className="border-t-0">
             <Button type="submit" className="block w-full" size="lg">
               Continue
             </Button>
           </Card.Footer>
-          <Card.Footer className="p-0">
+          <Card.Footer className="p-0 border-t-0">
             <Progress value={percent} className="w-full" />
           </Card.Footer>
-          <Card.Footer className="flex items-center justify-between gap-4">
+          <Card.Footer className="flex items-center justify-between gap-4 border-t-0">
             {!isFirstStep && (
               <Button
                 type="button"
