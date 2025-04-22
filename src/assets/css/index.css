@@ -6,7 +6,7 @@
   margin-inline: auto;
 }
 @theme {
-  --color-primary: #4f39f6;
+  --color-primary: #6f04f4;
   --color-secondary: #e000ad;
   --color-success: #17c653;
   --color-info: #0084d1;
@@ -36,6 +36,7 @@
 
 html,
 body {
+  --main-height: calc(100vh - 4rem);
   font-family: "Inter", sans-serif;
 }
 

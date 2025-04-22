@@ -1,24 +1,42 @@
+import { Dispatch } from "react";
 import { InputGroup, Typography } from "reaxify/components";
 import { cn } from "reaxify/helpers";
 import { useInputValidation } from "reaxify/hooks";
+import { Rules } from "reaxify/types";
 
 type Props = {
   label: string;
+  rules?: Rules;
+  value?: string | null;
+  setValue?: Dispatch<string | null>;
+  placeholder?: string;
 };
 
-export default function Textfield({ label }: Props) {
-  const { ref, error, errorMessage } = useInputValidation({
-    rules: [(val) => !!val.trim().length || "Field is required."],
-  });
+export default function Textfield({
+  label,
+  rules = [],
+  value,
+  setValue,
+  placeholder,
+}: Props) {
+  const { ref, error, errorMessage } = useInputValidation({ rules });
   return (
     <InputGroup>
       <InputGroup.Label>{label}</InputGroup.Label>
       <InputGroup.Stack className={cn(error && "border-danger")}>
-        <InputGroup.FormControl ref={ref} />
+        <InputGroup.FormControl
+          ref={ref}
+          value={value ?? ""}
+          onChange={(e) => setValue?.(e.target.value || null)}
+          placeholder={placeholder}
+        />
       </InputGroup.Stack>
       <Typography
         variant="body-2"
-        className={cn("empty:hidden", error ? "text-danger" : "text-gray-400")}
+        className={cn(
+          "empty:hidden mt-px",
+          error ? "text-danger" : "text-gray-400"
+        )}
       >
         {errorMessage}
       </Typography>

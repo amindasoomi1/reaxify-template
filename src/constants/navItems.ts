@@ -15,6 +15,7 @@ const navItems = [
         { label: "Personal", to: "personal" },
         { label: "Travel", to: "travel" },
       ],
+      [{ label: "Onboarding", to: "onboarding" }],
     ],
   },
   {
