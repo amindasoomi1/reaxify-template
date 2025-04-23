@@ -54,6 +54,7 @@ export default function Login() {
               setValue={handleSetData("email")}
               rules={rules.email}
               type="email"
+              autoFocus
             />
             <Textfield
               label="Password"

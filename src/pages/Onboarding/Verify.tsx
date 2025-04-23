@@ -14,6 +14,7 @@ export default function Verify() {
         value={data.code}
         setValue={handleSetData("code")}
         placeholder="000000"
+        autoFocus
       />
     </Card.Body>
   );

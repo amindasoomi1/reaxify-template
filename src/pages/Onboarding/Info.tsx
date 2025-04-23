@@ -14,6 +14,7 @@ export default function Info() {
         setValue={handleSetData("companyHave")}
         rules={rules.required}
         placeholder="Gym"
+        autoFocus
       />
       <Textfield
         label="Current software"

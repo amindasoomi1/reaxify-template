@@ -14,6 +14,7 @@ export default function Email() {
         value={data.email}
         setValue={handleSetData("email")}
         placeholder="Arnold@example.com"
+        autoFocus
       />
     </Card.Body>
   );
