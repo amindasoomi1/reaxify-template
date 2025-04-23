@@ -1,5 +1,5 @@
-import { ClassNameProps } from "@/types";
 import { Dispatch, FormEvent } from "react";
+import { ClassNameProps } from "reaxify/types";
 import { twMerge } from "tailwind-merge";
 import Icon from "./Icon";
 import IconButton from "./IconButton";

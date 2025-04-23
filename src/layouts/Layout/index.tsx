@@ -1,6 +1,6 @@
-import { ChildrenProps } from "@/types";
 import { ComponentProps } from "react";
 import { Fragment } from "react/jsx-runtime";
+import { ChildrenProps } from "reaxify/types";
 import { twMerge } from "tailwind-merge";
 
 function Layout({ children }: ChildrenProps) {
