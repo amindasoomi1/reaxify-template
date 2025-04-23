@@ -8,14 +8,11 @@ const navItems = [
       [
         // { label: "Sales", to: "sales" },
         { label: "Sales", to: "" },
-        { label: "CRM Analytics", to: "crm-analytics" },
-        { label: "Orders", to: "orders" },
       ],
       [
-        { label: "Personal", to: "personal" },
-        { label: "Travel", to: "travel" },
+        { label: "Login", to: "login" },
+        { label: "Onboarding", to: "onboarding" },
       ],
-      [{ label: "Onboarding", to: "onboarding" }],
     ],
   },
   {

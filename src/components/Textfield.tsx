@@ -1,15 +1,16 @@
-import { Dispatch } from "react";
+import { Dispatch, HTMLInputTypeAttribute } from "react";
 import { InputGroup, Typography } from "reaxify/components";
 import { cn } from "reaxify/helpers";
 import { useInputValidation } from "reaxify/hooks";
 import { Rules } from "reaxify/types";
-
 type Props = {
   label: string;
   rules?: Rules;
   value?: string | null;
   setValue?: Dispatch<string | null>;
   placeholder?: string;
+  type?: HTMLInputTypeAttribute;
+  autoFocus?: boolean;
 };
 
 export default function Textfield({
@@ -18,6 +19,8 @@ export default function Textfield({
   value,
   setValue,
   placeholder,
+  type = "text",
+  autoFocus = false,
 }: Props) {
   const { ref, error, errorMessage } = useInputValidation({ rules });
   return (
@@ -29,6 +32,8 @@ export default function Textfield({
           value={value ?? ""}
           onChange={(e) => setValue?.(e.target.value || null)}
           placeholder={placeholder}
+          type={type}
+          autoFocus={autoFocus}
         />
       </InputGroup.Stack>
       <Typography

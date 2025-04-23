@@ -11,20 +11,23 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.1",
-    "castium": "^1.0.22",
+    "castium": "^1.0.23",
     "i18next": "^24.2.3",
     "iconsax-react": "^0.0.8",
+    "lodash": "^4.17.21",
     "path": "^0.12.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hot-toast": "^2.5.2",
     "react-i18next": "^15.4.1",
     "react-router-dom": "^7.5.1",
-    "reaxify": "^0.0.22",
+    "reaxify": "^0.0.28",
     "tailwind-merge": "^3.1.0",
-    "tailwindcss": "^4.1.1"
+    "tailwindcss": "^4.1.1",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.16",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
