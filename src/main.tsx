@@ -10,12 +10,20 @@ import "./assets/css/index.css";
 import { i18n } from "./boot";
 import appConfig from "./constants/appConfig.ts";
 
+declare module "reaxify/types" {
+  interface ExtendBadgeVariant {}
+  interface ExtendButtonVariant {}
+  interface ExtendTypographyVariant {}
+  interface ExtendColor {}
+  interface ExtendSize {}
+}
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18n}>
       <BrowserRouter>
         <ThemeProvider
-          classes={{
+          extendClasses={{
             card: { base: "shadow-soft" },
             progress: { color: { primary: "bg-gray-200" } },
             button: {

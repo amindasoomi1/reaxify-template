@@ -8,6 +8,8 @@ import checker from "vite-plugin-checker";
 export default defineConfig({
   resolve: {
     alias: {
+      // eslint-disable-next-line
+      // @ts-expect-error
       "@": path.resolve(__dirname, "./src"),
     },
   },
