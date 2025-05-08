@@ -101,7 +101,7 @@ export default function Sidebar({
           </IconButton>
         </div>
         <div className="w-full flex-1 overflow-auto px-4">
-          {activeGroup.items.map((e, i) => (
+          {activeGroup.items?.map((e, i) => (
             <Fragment key={i}>
               <ul className="w-full">
                 {e.map((e) => (
