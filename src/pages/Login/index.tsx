@@ -4,8 +4,9 @@ import { Layout } from "@/layouts";
 import { c } from "castium";
 import { cloneDeep } from "lodash";
 import { useState } from "react";
+import { Form } from "react-form-rules";
 import { useAxios } from "reaxify/axios";
-import { Box, Button, Card, Form, Stack, Typography } from "reaxify/components";
+import { Box, Button, Card, Stack, Typography } from "reaxify/components";
 
 export default function Login() {
   const [axios, loading] = useAxios();

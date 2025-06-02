@@ -18,10 +18,11 @@
     "path": "^0.12.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-form-rules": "^0.0.10",
     "react-hot-toast": "^2.5.2",
     "react-i18next": "^15.5.1",
     "react-router-dom": "^7.5.3",
-    "reaxify": "^0.0.39",
+    "reaxify": "^0.0.45",
     "tailwind-merge": "^3.2.0",
     "tailwindcss": "^4.1.5",
     "zustand": "^5.0.3"

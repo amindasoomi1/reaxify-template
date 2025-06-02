@@ -1,8 +1,9 @@
 import { Icon } from "@/components";
 import { Layout } from "@/layouts";
 import { createContext, Dispatch, SetStateAction } from "react";
+import { Form } from "react-form-rules";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Form, Progress, Typography } from "reaxify/components";
+import { Button, Card, Progress, Typography } from "reaxify/components";
 import { usePersistedState } from "reaxify/hooks";
 import Email from "./Email";
 import Info from "./Info";

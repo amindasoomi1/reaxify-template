@@ -1,4 +1,4 @@
-import { Rules } from "reaxify/types";
+import { Rules } from "react-form-rules";
 
 const required: Rules = [
   (val) => {

@@ -1,8 +1,7 @@
 import { Dispatch, HTMLInputTypeAttribute } from "react";
+import { Rules, useInputRules } from "react-form-rules";
 import { InputGroup, Typography } from "reaxify/components";
 import { cn } from "reaxify/helpers";
-import { useInputValidation } from "reaxify/hooks";
-import { Rules } from "reaxify/types";
 type Props = {
   label: string;
   rules?: Rules;
@@ -22,7 +21,7 @@ export default function Textfield({
   type = "text",
   autoFocus = false,
 }: Props) {
-  const { ref, error, errorMessage } = useInputValidation({ rules });
+  const { ref, error, helperText } = useInputRules({ rules });
   return (
     <InputGroup>
       <InputGroup.Label>{label}</InputGroup.Label>
@@ -43,7 +42,7 @@ export default function Textfield({
           error ? "text-danger" : "text-gray-400"
         )}
       >
-        {errorMessage}
+        {helperText}
       </Typography>
     </InputGroup>
   );
