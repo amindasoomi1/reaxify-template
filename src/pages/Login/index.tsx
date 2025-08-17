@@ -1,15 +1,14 @@
+import { auth } from "@/apis";
 import { Logo, Textfield } from "@/components";
 import { rules } from "@/constants";
 import { Layout } from "@/layouts";
-import { c } from "castium";
-import { cloneDeep } from "lodash";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { Form } from "react-form-rules";
-import { useAxios } from "reaxify/axios";
+import toast from "react-hot-toast";
 import { Button, Card, Stack, Typography } from "reaxify/components";
 
 export default function Login() {
-  const [axios, loading] = useAxios();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -20,13 +19,14 @@ export default function Login() {
       setData((p) => ({ ...p, [key]: value }));
     };
   };
+  const { mutate, isPending } = useMutation({
+    mutationFn: auth.login,
+    onSuccess: () => {
+      toast.success("success");
+    },
+  });
   const submit = () => {
-    const url = "";
-    const body = cloneDeep(data);
-    body.email = c(body.email).string().get();
-    axios.post(url, body).then(({ data }) => {
-      console.log(data);
-    });
+    mutate(data);
   };
   return (
     <Layout>
@@ -66,7 +66,7 @@ export default function Login() {
             />
           </Card.Body>
           <Card.Footer>
-            <Button type="submit" className="block w-full" loading={loading}>
+            <Button type="submit" className="block w-full" loading={isPending}>
               Login
             </Button>
           </Card.Footer>

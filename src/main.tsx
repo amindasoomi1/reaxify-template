@@ -1,8 +1,9 @@
+import { queryClient } from "@/apis";
+import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router";
-import { AxiosProvider } from "reaxify/axios";
 import { ThemeProvider } from "reaxify/providers";
 import "reaxify/style.css";
 // eslint-disable-next-line
@@ -11,8 +12,6 @@ import { registerSW } from "virtual:pwa-register";
 import App from "./App.tsx";
 import "./assets/css/index.css";
 import { i18n } from "./boot";
-import appConfig from "./constants/appConfig.ts";
-
 // declare module "reaxify/types" {
 //   interface ExtendBadgeVariant {}
 //   interface ExtendButtonVariant {}
@@ -74,13 +73,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             },
           }}
         >
-          <AxiosProvider
-            config={{ baseURL: appConfig.baseUrl }}
-            cancelOnUnmount
-            cancelDuplicatedRequests
-          >
+          <QueryClientProvider client={queryClient}>
             <App />
-          </AxiosProvider>
+          </QueryClientProvider>
         </ThemeProvider>
       </BrowserRouter>
     </I18nextProvider>
