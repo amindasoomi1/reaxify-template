@@ -10,6 +10,8 @@ type Props = {
   placeholder?: string;
   type?: HTMLInputTypeAttribute;
   autoFocus?: boolean;
+  inputDir?: "ltr" | "rtl" | "auto";
+  name?: string;
 };
 
 export default function Textfield({
@@ -20,6 +22,8 @@ export default function Textfield({
   placeholder,
   type = "text",
   autoFocus = false,
+  inputDir,
+  name,
 }: Props) {
   const { ref, error, helperText } = useInputRules({ rules });
   return (
@@ -28,6 +32,8 @@ export default function Textfield({
       <InputGroup.Stack className={cn(error && "border-danger")}>
         <InputGroup.FormControl
           ref={ref}
+          dir={inputDir}
+          name={name}
           value={value ?? ""}
           onChange={(e) => setValue?.(e.target.value || null)}
           placeholder={placeholder}
@@ -38,7 +44,7 @@ export default function Textfield({
       <Typography
         variant="body-2"
         className={cn(
-          "empty:hidden mt-px",
+          "empty:hidden mt-px px-px",
           error ? "text-danger" : "text-gray-400"
         )}
       >

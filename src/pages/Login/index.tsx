@@ -6,7 +6,7 @@ import { cloneDeep } from "lodash";
 import { useState } from "react";
 import { Form } from "react-form-rules";
 import { useAxios } from "reaxify/axios";
-import { Box, Button, Card, Stack, Typography } from "reaxify/components";
+import { Button, Card, Stack, Typography } from "reaxify/components";
 
 export default function Login() {
   const [axios, loading] = useAxios();
@@ -35,7 +35,7 @@ export default function Login() {
           <Card.Header className="space-y-4">
             <Stack className="items-center gap-4">
               <Logo className="h-10" />
-              <Box className="flex-1">
+              <Stack variant="vertical" className="flex-1">
                 <Typography
                   variant="heading-5"
                   className="flex-1 text-gray-700"
@@ -45,7 +45,7 @@ export default function Login() {
                 <Typography className="text-gray-500">
                   Sign in with your email address
                 </Typography>
-              </Box>
+              </Stack>
             </Stack>
           </Card.Header>
           <Card.Body className="space-y-4">

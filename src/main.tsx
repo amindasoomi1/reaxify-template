@@ -5,18 +5,28 @@ import { BrowserRouter } from "react-router";
 import { AxiosProvider } from "reaxify/axios";
 import { ThemeProvider } from "reaxify/providers";
 import "reaxify/style.css";
+// eslint-disable-next-line
+// @ts-expect-error
+import { registerSW } from "virtual:pwa-register";
 import App from "./App.tsx";
 import "./assets/css/index.css";
 import { i18n } from "./boot";
 import appConfig from "./constants/appConfig.ts";
 
-declare module "reaxify/types" {
-  interface ExtendBadgeVariant {}
-  interface ExtendButtonVariant {}
-  interface ExtendTypographyVariant {}
-  interface ExtendColor {}
-  interface ExtendSize {}
-}
+// declare module "reaxify/types" {
+//   interface ExtendBadgeVariant {}
+//   interface ExtendButtonVariant {}
+//   interface ExtendTypographyVariant {}
+//   interface ExtendColor {}
+//   interface ExtendSize {}
+// }
+registerSW({
+  immediate: true,
+  onNeedRefresh() {},
+  onOfflineReady() {
+    console.log("App ready to work offline");
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -28,16 +38,38 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             progress: { color: { primary: "bg-gray-200" } },
             button: {
               color: {
-                primary: { solid: "ring-2 ring-offset-2 focus:ring-primary" },
-                secondary: {
-                  solid: "ring-2 ring-offset-2 focus:ring-secondary",
+                primary: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-primary",
                 },
-                info: { solid: "ring-2 ring-offset-2 focus:ring-info" },
-                success: { solid: "ring-2 ring-offset-2 focus:ring-success" },
-                warning: { solid: "ring-2 ring-offset-2 focus:ring-warning" },
-                danger: { solid: "ring-2 ring-offset-2 focus:ring-danger" },
-                dark: { solid: "ring-2 ring-offset-2 focus:ring-dark" },
-                light: { solid: "ring-2 ring-offset-2 focus:ring-light" },
+                secondary: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-secondary",
+                },
+                info: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-info",
+                },
+                success: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-success",
+                },
+                warning: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-warning",
+                },
+                danger: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-danger",
+                },
+                dark: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-dark",
+                },
+                light: {
+                  solid:
+                    "ring-2 ring-transparent ring-offset-2 focus:ring-light",
+                },
               },
             },
           }}
