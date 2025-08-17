@@ -2,7 +2,7 @@ import logo from "@/assets/logos/logo.svg";
 import { Icon, IconButton, Image } from "@/components";
 import { appConfig, navItems } from "@/constants";
 import { Fragment, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Tooltip } from "reaxify/components";
 import { cn } from "reaxify/helpers";
 
@@ -23,7 +23,19 @@ export default function Sidebar({
   onShowLg,
   onHideLg,
 }: Props) {
-  const [activeGroupIndex, setActiveGroupIndex] = useState(0);
+  const location = useLocation();
+  const getInitActiveGroupIndex = () => {
+    const pathname = location.pathname.replace(/^\//, "");
+    const index = navItems.findIndex((e) =>
+      e.items?.some((f) =>
+        f.some((g) => pathname === g.to || pathname.startsWith(`${g.to}/`))
+      )
+    );
+    return index === -1 ? 0 : index;
+  };
+  const [activeGroupIndex, setActiveGroupIndex] = useState(
+    getInitActiveGroupIndex
+  );
   const activeGroup = navItems[activeGroupIndex];
   const handleSetActiveGroupIndex = (index: number) => {
     return () => {
@@ -34,7 +46,7 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed flex inset-0 size-full z-10 overflow-hidden transition-colors",
+        "fixed flex inset-0 size-full z-10 overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
         open
           ? "bg-black/10 pointer-events-auto"
           : "bg-transparent pointer-events-none",
@@ -44,8 +56,10 @@ export default function Sidebar({
       <div
         className={cn(
           "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-gray-200 transition-[translate] z-[1]",
-          open ? "translate-x-0" : "-translate-x-full delay-150",
-          "lg:translate-x-0 lg:pointer-events-auto"
+          open
+            ? "translate-x-0"
+            : "-translate-x-full rtl:translate-x-full delay-150",
+          "lg:translate-x-0 rtl:lg:translate-x-0 lg:pointer-events-auto"
         )}
       >
         <Image src={logo} alt={appConfig.title} className="block size-10" />
@@ -79,16 +93,16 @@ export default function Sidebar({
           "w-(--prime-width) h-full flex flex-col items-start justify-start bg-white transition-[translate]",
           open
             ? "translate-x-0 delay-150"
-            : "translate-x-[calc(-100%-var(--main-width))]",
+            : "translate-x-[calc(var(--ratio)*(100%+var(--main-width)))]",
           "lg:delay-[0ms]",
           lgOpen
             ? "lg:translate-x-0 lg:pointer-events-auto"
-            : "lg:translate-x-[calc(-100%-var(--main-width))]"
+            : "lg:translate-x-[calc(var(--ratio)*(100%+var(--main-width)))]"
         )}
       >
         <div className="w-full h-16 flex items-center gap- px-4">
           <p className="flex-1 truncate tracking-wider text-base text-gray-800">
-            {activeGroup.label}
+            {activeGroup?.label}
           </p>
           <IconButton
             type="button"
@@ -101,7 +115,7 @@ export default function Sidebar({
           </IconButton>
         </div>
         <div className="w-full flex-1 overflow-auto px-4">
-          {activeGroup.items?.map((e, i) => (
+          {activeGroup?.items?.map((e, i) => (
             <Fragment key={i}>
               <ul className="w-full">
                 {e.map((e) => (
