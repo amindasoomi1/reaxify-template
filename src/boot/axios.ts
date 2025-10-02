@@ -1,3 +1,4 @@
+import { auth } from "@/apis";
 import { appConfig } from "@/constants";
 import { getToken } from "@/helpers";
 import initAxios, { InternalAxiosRequestConfig } from "axios";
@@ -95,6 +96,7 @@ axios.interceptors.response.use(
       error?.code === "ERR_CANCELED",
       error?.config?.signal?.reason === cancelMessage,
     ].some(Boolean);
+    const isUnauthorized = error?.response?.status === 401;
     const status = error?.response?.status ?? 0;
     if (!isCanceled && canRetry(status, error?.config?.meta?.id)) {
       if (retryDelay) await wait(retryDelay);
@@ -102,13 +104,11 @@ axios.interceptors.response.use(
       incrementRetryCount(error?.config);
       return axios.request(handledRequest);
     }
-    if (!isCanceled) {
-      handleDeleteCancelDuplicated(error?.config);
-    }
-    resetRetryCount(error?.config);
-    if (!isCanceled) {
+    if (!isCanceled) handleDeleteCancelDuplicated(error?.config);
+    if (!isCanceled && !isUnauthorized)
       toast.error(error?.response?.data?.details);
-    }
+    if (isUnauthorized) await auth.logout();
+    resetRetryCount(error?.config);
     return Promise.reject(error);
   }
 );

@@ -25,3 +25,8 @@ export async function login(data: { email: string; password: string }) {
     return res.data;
   });
 }
+export async function logout() {
+  queryClient.invalidateQueries({ queryKey: [queryKeys.profile] });
+  useTokenStore.setState({ accessToken: null, refreshToken: null });
+  useProfileStore.setState({ profile: null });
+}
