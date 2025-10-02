@@ -1,17 +1,21 @@
 import { Textfield } from "@/components";
 import { rules } from "@/constants";
-import { useContext } from "react";
 import { Card } from "reaxify/components";
+import { useContextSelector } from "use-context-selector";
 import { OnboardingContext } from ".";
 
 export default function Verify() {
-  const { data, handleSetData } = useContext(OnboardingContext);
+  const verifyCode = useContextSelector(OnboardingContext, (s) => s.data.code);
+  const handleSetData = useContextSelector(
+    OnboardingContext,
+    (s) => s.handleSetData
+  );
   return (
     <Card.Body>
       <Textfield
         label="Enter verification code"
         rules={rules.verifyCode}
-        value={data.code}
+        value={verifyCode}
         setValue={handleSetData("code")}
         placeholder="000000"
         autoFocus

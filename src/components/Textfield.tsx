@@ -5,8 +5,8 @@ import { cn } from "reaxify/helpers";
 type Props = {
   label: string;
   rules?: Rules;
-  value?: string | null;
-  setValue?: Dispatch<string | null>;
+  value?: string;
+  setValue?: Dispatch<string>;
   placeholder?: string;
   type?: HTMLInputTypeAttribute;
   autoFocus?: boolean;
@@ -35,7 +35,7 @@ export default function Textfield({
           dir={inputDir}
           name={name}
           value={value ?? ""}
-          onChange={(e) => setValue?.(e.target.value || null)}
+          onChange={(e) => setValue?.(e.target.value)}
           placeholder={placeholder}
           type={type}
           autoFocus={autoFocus}

@@ -1,11 +1,15 @@
 import { Textfield } from "@/components";
 import { rules } from "@/constants";
-import { useContext } from "react";
 import { Card } from "reaxify/components";
+import { useContextSelector } from "use-context-selector";
 import { OnboardingContext } from ".";
 
 export default function Info() {
-  const { data, handleSetData } = useContext(OnboardingContext);
+  const data = useContextSelector(OnboardingContext, (s) => s.data);
+  const handleSetData = useContextSelector(
+    OnboardingContext,
+    (s) => s.handleSetData
+  );
   return (
     <Card.Body className="space-y-4">
       <Textfield

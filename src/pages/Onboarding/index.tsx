@@ -1,21 +1,22 @@
 import { Icon } from "@/components";
 import { Layout } from "@/layouts";
-import { createContext, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Form } from "react-form-rules";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Progress, Typography } from "reaxify/components";
 import { usePersistedState } from "reaxify/hooks";
+import { createContext } from "use-context-selector";
 import Email from "./Email";
 import Info from "./Info";
 import Verify from "./Verify";
 
 type Data = {
-  email: string | null;
-  code: string | null;
-  companyHave: string | null;
-  software: string | null;
-  companyName: string | null;
-  website: string | null;
+  email: string;
+  code: string;
+  companyHave: string;
+  software: string;
+  companyName: string;
+  website: string;
 };
 type Context = {
   data: Data;
@@ -25,12 +26,12 @@ type Context = {
 };
 export const OnboardingContext = createContext<Context>({
   data: {
-    email: null,
-    code: null,
-    companyHave: null,
-    software: null,
-    companyName: null,
-    website: null,
+    email: "",
+    code: "",
+    companyHave: "",
+    software: "",
+    companyName: "",
+    website: "",
   },
   setData: () => {},
   handleSetData: () => () => {},
@@ -44,18 +45,17 @@ export default function Onboarding() {
   ];
   const navigate = useNavigate();
   const [activeStepIndex, setActiveStepIndex, clearActiveStepIndex] =
-    usePersistedState("onboarding-sep", 0, "sessionStorage");
+    usePersistedState(0, { name: "onboarding-sep", storage: "sessionStorage" });
   const [data, setData, clearData] = usePersistedState<Data>(
-    "onboarding-data",
     {
-      email: null,
-      code: null,
-      companyHave: null,
-      software: null,
-      companyName: null,
-      website: null,
+      email: "",
+      code: "",
+      companyHave: "",
+      software: "",
+      companyName: "",
+      website: "",
     },
-    "sessionStorage"
+    { name: "onboarding-data", storage: "sessionStorage" }
   );
   const isFirstStep = activeStepIndex === 0;
   const percent = 100 * ((activeStepIndex + 1) / steps.length);
