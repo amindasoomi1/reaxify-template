@@ -1,4 +1,5 @@
-import { Dispatch, HTMLInputTypeAttribute } from "react";
+import { rules } from "@/constants";
+import { Dispatch, HTMLInputTypeAttribute, useMemo } from "react";
 import { Rules, useInputRules } from "react-form-rules";
 import { InputGroup, Typography } from "reaxify/components";
 import { cn } from "reaxify/helpers";
@@ -12,11 +13,12 @@ type Props = {
   autoFocus?: boolean;
   inputDir?: "ltr" | "rtl" | "auto";
   name?: string;
+  required?: boolean;
 };
 
 export default function Textfield({
   label,
-  rules = [],
+  rules: userRules = [],
   value,
   setValue,
   placeholder,
@@ -24,11 +26,19 @@ export default function Textfield({
   autoFocus = false,
   inputDir,
   name,
+  required,
 }: Props) {
-  const { ref, error, helperText } = useInputRules({ rules });
+  const inputRules = useMemo(() => {
+    if (required) return [...rules.required, ...userRules];
+    return userRules;
+  }, [userRules, required]);
+  const { ref, error, helperText } = useInputRules({ rules: inputRules });
   return (
     <InputGroup>
-      <InputGroup.Label>{label}</InputGroup.Label>
+      <InputGroup.Label>
+        {label}
+        {required && <span className="inline-block ms-1 text-danger">*</span>}
+      </InputGroup.Label>
       <InputGroup.Stack className={cn(error && "border-danger")}>
         <InputGroup.FormControl
           ref={ref}

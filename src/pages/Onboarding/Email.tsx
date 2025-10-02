@@ -16,6 +16,7 @@ export default function Email() {
         label="Email"
         rules={rules.email}
         value={email}
+        required
         setValue={handleSetData("email")}
         placeholder="Arnold@example.com"
         autoFocus

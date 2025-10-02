@@ -54,6 +54,7 @@ export default function Login() {
               value={data.email}
               setValue={handleSetData("email")}
               rules={rules.email}
+              required
               type="email"
               autoFocus
             />
@@ -61,7 +62,7 @@ export default function Login() {
               label="Password"
               value={data.password}
               setValue={handleSetData("password")}
-              rules={rules.required}
+              required
               type="password"
             />
           </Card.Body>

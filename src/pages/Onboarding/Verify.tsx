@@ -15,6 +15,7 @@ export default function Verify() {
       <Textfield
         label="Enter verification code"
         rules={rules.verifyCode}
+        required
         value={verifyCode}
         setValue={handleSetData("code")}
         placeholder="000000"
