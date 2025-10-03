@@ -1,8 +1,8 @@
 import MainLayout from "@/layouts/MainLayout";
-import Error404 from "@/pages/Error404";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Onboarding from "@/pages/Onboarding";
+import PageNotFound from "@/pages/PageNotFound";
 import { RouteObject } from "react-router";
 
 const routes: RouteObject[] = [
@@ -15,6 +15,6 @@ const routes: RouteObject[] = [
     ],
   },
   { path: "login", element: <Login /> },
-  { path: "*", element: <Error404 /> },
+  { path: "*", element: <PageNotFound /> },
 ];
 export default routes;

@@ -17,6 +17,14 @@ export const queryClient = new QueryClient({
         return failureCount < 4;
       },
       retryDelay: 500,
+      // eslint-disable-next-line
+      throwOnError: (error: any) => {
+        const status = error?.response?.status;
+        const retryStatuses = [500, 503];
+        console.log(error);
+        if (!retryStatuses.includes(status)) return false;
+        return true;
+      },
     },
     mutations: {
       // eslint-disable-next-line
