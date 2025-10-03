@@ -1,4 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -8,7 +9,23 @@ export const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
       refetchOnMount: false,
-      retry: 2,
+      // eslint-disable-next-line
+      retry: (failureCount, error: any) => {
+        const status = error?.response?.status;
+        const retryStatuses = [500, 503, 409];
+        if (!retryStatuses.includes(status)) return false;
+        return failureCount < 4;
+      },
+      retryDelay: 500,
+    },
+    mutations: {
+      // eslint-disable-next-line
+      onError: (error: any) => {
+        const defaultMessage = "An error occurred!";
+        const message = error?.response?.data?.details;
+        toast.error(message || defaultMessage);
+        return true;
+      },
     },
   },
 });

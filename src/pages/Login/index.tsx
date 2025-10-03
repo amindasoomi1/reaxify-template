@@ -9,6 +9,12 @@ import toast from "react-hot-toast";
 import { Button, Card, Stack, Typography } from "reaxify/components";
 
 export default function Login() {
+  const { mutate, isPending } = useMutation({
+    mutationFn: auth.login,
+    onSuccess: () => {
+      toast.success("success");
+    },
+  });
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -19,12 +25,6 @@ export default function Login() {
       setData((p) => ({ ...p, [key]: value }));
     };
   };
-  const { mutate, isPending } = useMutation({
-    mutationFn: auth.login,
-    onSuccess: () => {
-      toast.success("success");
-    },
-  });
   const submit = () => {
     mutate(data);
   };
