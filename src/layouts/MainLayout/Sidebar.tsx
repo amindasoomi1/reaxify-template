@@ -123,6 +123,7 @@ export default function Sidebar({
                     <NavLink
                       to={e.to}
                       className="flex items-center w-full h-[2.125rem] text-[0.8125rem] text-gray-600 font-normal transition-colors hover:text-gray-900 [&.active]:text-primary [&.active]:font-medium"
+                      onClick={onHide}
                     >
                       {e.label}
                     </NavLink>
