@@ -130,7 +130,7 @@ export default function Sidebar({
                   </li>
                 ))}
               </ul>
-              <div className="w-full my-2.5 h-px bg-gray-200 dark:bg-dark-500" />
+              <div className="w-full my-2.5 h-px bg-gray-200 dark:bg-dark-500 last:hidden" />
             </Fragment>
           ))}
         </div>
