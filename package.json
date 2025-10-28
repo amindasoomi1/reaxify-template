@@ -7,13 +7,14 @@
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "generate-types": "npx swagger-typescript-api generate -p YOUR_SWAGGER_URL -o ./src/types/api",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.5",
     "@tanstack/react-query": "^5.85.3",
     "axios": "^1.11.0",
-    "castium": "^1.0.24",
+    "castium": "^1.0.25",
     "i18next": "^25.0.2",
     "iconsax-react": "^0.0.8",
     "lodash": "^4.17.21",
@@ -21,7 +22,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-error-boundary": "^6.0.0",
-    "react-form-rules": "^0.0.12",
+    "react-form-rules": "^0.0.13",
     "react-hot-toast": "^2.5.2",
     "react-i18next": "^16.0.0",
     "react-router-dom": "^7.5.3",
@@ -29,8 +30,6 @@
     "tailwind-merge": "^3.2.0",
     "tailwindcss": "^4.1.5",
     "use-context-selector": "^2.0.0",
-    "vite-plugin-pwa": "^1.0.2",
-    "vite-plugin-svgr": "^4.3.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
@@ -46,6 +45,8 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "typescript": "^5.8.3",
     "vite": "^7.1.8",
-    "vite-plugin-checker": "^0.11.0"
+    "vite-plugin-checker": "^0.11.0",
+    "vite-plugin-pwa": "^1.1.0",
+    "vite-plugin-svgr": "^4.5.0"
   }
 }
