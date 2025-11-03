@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
+    "prebuild": "node scripts/generate-firebase-sw.cjs && node scripts/generate-robots.cjs",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "generate-types": "npx swagger-typescript-api generate --path SWAGGER_URL -o ./src/types",
-    "preview": "vite preview"
+    "generate-swagger-types": "npx swagger-typescript-api generate --path SWAGGER_URL -o ./src/types --name api.ts --no-client",
+    "remove-optional-from-generated-swagger-types": "node scripts/remove-optional-from-swagger-types.cjs",
+    "generate-types": "npm run generate-swagger-types && npm run remove-optional-from-generated-swagger-types"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.5",
