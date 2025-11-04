@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
-    "prebuild": "node scripts/generate-firebase-sw.cjs && node scripts/generate-robots.cjs",
+    "prebuild": "npm audit fix && node scripts/generate-firebase-sw.cjs && node scripts/generate-robots.cjs",
     "build": "tsc && vite build",
     "generate-swagger-types": "npx swagger-typescript-api generate --path SWAGGER_URL -o ./src/types --name api.ts --no-client",
     "remove-optional-from-generated-swagger-types": "node scripts/remove-optional-from-swagger-types.cjs",
     "generate-types": "npm run generate-swagger-types && npm run remove-optional-from-generated-swagger-types"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.85.3",
+    "@tanstack/react-query": "^5.90.6",
     "axios": "^1.11.0",
     "castium": "^1.0.25",
     "i18next": "^25.0.2",
@@ -26,7 +26,7 @@
     "react-hot-toast": "^2.5.2",
     "react-i18next": "^16.0.0",
     "react-router-dom": "^7.5.3",
-    "reaxify": "^0.0.76",
+    "reaxify": "^0.0.77",
     "tailwind-merge": "^3.2.0",
     "use-context-selector": "^2.0.0",
     "zustand": "^5.0.3"
