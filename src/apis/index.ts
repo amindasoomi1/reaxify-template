@@ -1,4 +1,5 @@
 import { QueryClient, QueryKey } from "@tanstack/react-query";
+import { isArray, isObject } from "lodash";
 import toast from "react-hot-toast";
 
 export const queryClient = new QueryClient({
@@ -41,12 +42,29 @@ export const queryClient = new QueryClient({
 export function syncList<TList, TDetail>(
   listKey: QueryKey,
   newItem: TDetail,
-  updater?: (old: TList | undefined, item: TDetail) => TList
+  matchKeys: (keyof TDetail)[]
 ) {
-  queryClient.setQueriesData<TList>({ queryKey: listKey }, (old) =>
+  queryClient.setQueriesData<TList>({ queryKey: listKey }, (old) => {
+    if (!old) return old;
+
     // eslint-disable-next-line
-    updater ? updater(old, newItem) : (newItem as any)
-  );
+    const shouldUpdate = (item: any) =>
+      matchKeys.every((key) => item[key] === newItem[key]);
+
+    if (Array.isArray(old)) {
+      return old.map((item) => (shouldUpdate(item) ? newItem : item));
+    }
+    // eslint-disable-next-line
+    // @ts-ignore
+    if (isObject(old) && "items" in old && isArray(old.items)) {
+      return {
+        ...old,
+        items: old.items.map((item) => (shouldUpdate(item) ? newItem : item)),
+        // eslint-disable-next-line
+      } as any;
+    }
+    return shouldUpdate(old) ? newItem : old;
+  });
 }
 
 export function syncDetail<TDetail>(
