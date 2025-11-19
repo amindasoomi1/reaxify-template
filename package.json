@@ -12,9 +12,11 @@
     "generate-types": "npm run generate-swagger-types && npm run remove-optional-from-generated-swagger-types"
   },
   "dependencies": {
+    "@microsoft/signalr": "^10.0.0",
     "@tanstack/react-query": "^5.90.6",
     "axios": "^1.11.0",
     "castium": "^1.0.25",
+    "firebase": "^12.6.0",
     "i18next": "^25.0.2",
     "iconsax-react": "^0.0.8",
     "lodash": "^4.17.21",
