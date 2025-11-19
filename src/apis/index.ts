@@ -1,4 +1,4 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryFilters, QueryKey } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 export const queryClient = new QueryClient({
@@ -37,5 +37,25 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+export function syncList<TList, TDetail>(
+  listKey: QueryFilters<QueryKey>,
+  newItem: TDetail,
+  updater?: (old: TList | undefined, item: TDetail) => TList
+) {
+  queryClient.setQueriesData<TList>(listKey, (old) =>
+    updater ? updater(old, newItem) : old
+  );
+}
+
+export function syncDetail<TDetail>(
+  detailKey: QueryKey,
+  newItem: TDetail,
+  updater?: (old: TDetail | undefined, item: TDetail) => TDetail
+) {
+  queryClient.setQueryData<TDetail>(detailKey, (old) =>
+    updater ? updater(old, newItem) : newItem
+  );
+}
 
 export * as auth from "./auth";
