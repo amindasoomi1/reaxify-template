@@ -30,14 +30,19 @@ export default function Textfield({
 }: Props) {
   const inputRules = useMemo(() => {
     if (required) return [...rules.required, ...userRules];
-    return userRules;
-  }, [userRules, required]);
+    if (value?.length) return userRules;
+    return [];
+  }, [userRules, required, value]);
   const { ref, error, helperText } = useInputRules({ rules: inputRules });
   return (
     <InputGroup>
       <InputGroup.Label>
         {label}
-        {required && <span className="inline-block ms-1 text-danger">*</span>}
+        {required ? (
+          <span className="inline-block ms-1 text-danger">*</span>
+        ) : (
+          <span>(Optional)</span>
+        )}
       </InputGroup.Label>
       <InputGroup.Stack className={cn(error && "border-danger")}>
         <InputGroup.FormControl
