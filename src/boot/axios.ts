@@ -1,6 +1,5 @@
 import { auth } from "@/apis";
 import { appConfig } from "@/constants";
-import { getToken } from "@/helpers";
 import initAxios, { InternalAxiosRequestConfig } from "axios";
 
 type Meta = {
@@ -65,7 +64,7 @@ axios.interceptors.response.use(
     if (isCanceled) return Promise.reject(error);
     const status = error?.response?.status;
     if (status === 401) {
-      const token = await getToken();
+      const token = await auth.refreshToken();
       if (token) {
         error.config.headers.set(
           "Authorization",

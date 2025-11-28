@@ -32,13 +32,10 @@ export default function useFirebaseMessage() {
     onMessage(messaging, (payload) => {
       const title = payload.notification?.title || payload.data?.title || "";
       const body = payload.notification?.body || payload.data?.body || "";
-      const image = payload.data?.image || "/512x512.png";
-      const profileImage =
-        payload.data?.["NotaryPublicExpertUserProfileUrl"] ||
-        payload.data?.["JusticeExpertUserProfileUrl"];
+      const icon = payload.data?.image || "/512x512.png";
       const notificationOptions = {
         body,
-        icon: profileImage || image,
+        icon,
         vibrate: [200],
         data: payload.data,
         actions: [],
