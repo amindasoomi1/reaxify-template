@@ -1,5 +1,6 @@
 import { auth } from "@/apis";
 import { appConfig } from "@/constants";
+import { useTokenStore } from "@/stores";
 import initAxios, { InternalAxiosRequestConfig } from "axios";
 
 type Meta = {
@@ -48,6 +49,10 @@ axios.interceptors.request.use(
     request.meta.id ??= `${request.method}-${request.url}`;
     request.meta.cancelOnUnmount ??= true;
     request.meta.cancelDuplicated ??= true;
+    const accessToken = useTokenStore.getState().accessToken;
+    if (accessToken) {
+      request.headers.set("Authorization", `Bearer ${accessToken}`);
+    }
     const handledRequest = handleSetCancelDuplicated(request);
     return handledRequest;
   },
