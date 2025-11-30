@@ -1,6 +1,7 @@
 import { axios } from "@/boot";
 import { appConfig, queryKeys } from "@/constants";
 import { useProfileStore, useTokenStore } from "@/stores";
+import baseAxios from "axios";
 import { c } from "castium";
 import { cloneDeep } from "lodash";
 import { queryClient } from ".";
@@ -27,17 +28,18 @@ export async function login(data: { email: string; password: string }) {
   return token;
 }
 export async function refreshToken() {
-  const url = `${appConfig.baseUrl}/refresh-token`;
-  const body = { refreshToken: useTokenStore.getState().refreshToken };
-  const token = await axios
+  const url = `${appConfig.baseUrl}/api/refresh-token`;
+  const refreshToken = useTokenStore.getState().refreshToken;
+  const body = { refreshToken };
+  const token = await baseAxios
     .post(url, body)
     .then((res) => res.data)
     .catch(() => null);
-  if (token) useTokenStore.setState((s) => ({ ...s, ...token }));
+  if (token) useTokenStore.setState({ ...token });
   return token;
 }
 export async function logout() {
-  queryClient.invalidateQueries({ queryKey: [queryKeys.profile] });
+  queryClient.clear();
   useTokenStore.setState({ accessToken: null, refreshToken: null });
   useProfileStore.setState({ profile: null });
 }

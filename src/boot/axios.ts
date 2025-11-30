@@ -77,7 +77,7 @@ axios.interceptors.response.use(
         );
         return axios.request(error.config);
       }
-      await auth.logout();
+      useTokenStore.setState({ accessToken: null, refreshToken: null });
       return Promise.reject(error);
     }
     handleDeleteCancelDuplicated(error?.config);
