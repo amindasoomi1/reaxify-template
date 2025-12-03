@@ -12,7 +12,6 @@ export default defineConfig({
   resolve: {
     alias: {
       // eslint-disable-next-line
-      // @ts-expect-error
       "@": path.resolve(__dirname, "./src"),
     },
   },
@@ -32,6 +31,28 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
         skipWaiting: true,
         clientsClaim: true,
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) =>
+              request.destination === "script" ||
+              request.destination === "style" ||
+              request.destination === "image" ||
+              request.destination === "font",
+            handler: "CacheFirst",
+            options: {
+              cacheName: "assets-cache",
+              expiration: { maxAgeSeconds: 604800 },
+            },
+          },
+          {
+            urlPattern: ({ url }) => url.origin === self.location.origin,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "pages-cache",
+              expiration: { maxAgeSeconds: 604800 },
+            },
+          },
+        ],
       },
       manifest: {
         name: "Reaxify Template",
