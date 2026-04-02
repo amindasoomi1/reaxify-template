@@ -7,7 +7,7 @@ type Props = {
 
 export default function Header({ onToggle, onToggleLg }: Props) {
   return (
-    <header className="relative w-full h-16 flex items-center gap-3 bg-white shadow px-(--layout-padding) transition-[padding]">
+    <header className="sticky w-full h-(--header-height) flex items-center gap-3 bg-white shadow px-(--layout-padding) transition-[padding] top-0 z-20">
       <IconButton
         type="button"
         variant="text"

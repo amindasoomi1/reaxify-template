@@ -65,7 +65,7 @@ export default function Home() {
                 <div
                   className={cn(
                     "size-12 flex items-center justify-center rounded-2xl",
-                    e.bgClasses
+                    e.bgClasses,
                   )}
                 >
                   <Icon

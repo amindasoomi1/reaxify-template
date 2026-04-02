@@ -31,13 +31,13 @@ export default function MainLayout() {
     <ProfileProvider>
       <div
         className={cn(
-          "[--main-width:4.5rem] [--prime-width:14.375rem] [--layout-padding:1rem] transition-[padding]",
+          "[--header-height:4rem] [--main-width:4.5rem] [--prime-width:14.375rem] [--layout-padding:1rem] transition-[padding]",
           lgOpen
             ? "lg:[--layout-padding:1.5rem]"
             : "lg:[--layout-padding:4rem]",
           lgOpen
             ? "lg:ps-[calc(var(--main-width)+var(--prime-width))]"
-            : "lg:ps-(--main-width)"
+            : "lg:ps-(--main-width)",
         )}
       >
         <Header onToggle={toggle} onToggleLg={toggleLg} />

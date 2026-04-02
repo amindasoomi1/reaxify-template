@@ -1,0 +1,39 @@
+:root {
+  --default-offset: 1.25rem;
+
+  --statusbar-height: env(safe-area-inset-top, var(--default-offset));
+  --navigation-button-height: env(
+    safe-area-inset-bottom,
+    var(--default-offset)
+  );
+
+  --offset-top: calc(var(--default-offset) + var(--statusbar-height));
+  --offset-bottom: calc(
+    var(--default-offset) + var(--navigation-button-height)
+  );
+}
+.layout {
+  padding-top: var(--statusbar-height);
+  padding-bottom: var(--navigation-button-height);
+  grid-template-areas:
+    "header"
+    "body"
+    "footer";
+}
+.layout:has(.layout-header) {
+  padding-top: 0;
+}
+.layout:has(.layout-footer) {
+  padding-bottom: 0;
+}
+.layout-header {
+  grid-area: header;
+  padding-top: var(--offset-top);
+}
+.layout-body {
+  grid-area: body;
+}
+.layout-footer {
+  grid-area: footer;
+  padding-bottom: var(--offset-bottom);
+}

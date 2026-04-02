@@ -28,13 +28,13 @@ export default function Sidebar({
     const pathname = location.pathname.replace(/^\//, "");
     const index = navItems.findIndex((e) =>
       e.items?.some((f) =>
-        f.some((g) => pathname === g.to || pathname.startsWith(`${g.to}/`))
-      )
+        f.some((g) => pathname === g.to || pathname.startsWith(`${g.to}/`)),
+      ),
     );
     return index === -1 ? 0 : index;
   };
   const [activeGroupIndex, setActiveGroupIndex] = useState(
-    getInitActiveGroupIndex
+    getInitActiveGroupIndex,
   );
   const activeGroup = navItems[activeGroupIndex];
   const handleSetActiveGroupIndex = (index: number) => {
@@ -46,20 +46,20 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed flex inset-0 size-full z-10 overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
+        "fixed flex inset-0 size-full z-30 overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
         open
           ? "bg-black/10 pointer-events-auto"
           : "bg-transparent pointer-events-none",
-        "lg:bg-transparent lg:pointer-events-none"
+        "lg:bg-transparent lg:pointer-events-none",
       )}
     >
       <div
         className={cn(
-          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-gray-200 transition-[translate] z-[1]",
+          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-gray-200 transition-[translate] z-10",
           open
             ? "translate-x-0"
             : "-translate-x-full rtl:translate-x-full delay-150",
-          "lg:translate-x-0 rtl:lg:translate-x-0 lg:pointer-events-auto"
+          "lg:translate-x-0 rtl:lg:translate-x-0 lg:pointer-events-auto",
         )}
       >
         <Image src={logo} alt={appConfig.title} className="block size-10" />
@@ -75,7 +75,7 @@ export default function Sidebar({
                     color={active ? "primary" : "dark"}
                     className={cn(
                       "size-11 rounded-lg shadow-none",
-                      active ? "bg-primary/10" : "text-gray-500"
+                      active ? "bg-primary/10" : "text-gray-500",
                     )}
                     onClick={handleSetActiveGroupIndex(i)}
                   >
@@ -97,7 +97,7 @@ export default function Sidebar({
           "lg:delay-[0ms]",
           lgOpen
             ? "lg:translate-x-0 lg:pointer-events-auto"
-            : "lg:translate-x-[calc(var(--ratio)*(100%+var(--main-width)))]"
+            : "lg:translate-x-[calc(var(--ratio)*(100%+var(--main-width)))]",
         )}
       >
         <div className="w-full h-16 flex items-center gap- px-4">
