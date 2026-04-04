@@ -46,7 +46,7 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed flex inset-0 size-full z-30 overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
+        "fixed flex inset-0 size-full z-[3] overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
         open
           ? "bg-black/10 pointer-events-auto"
           : "bg-transparent pointer-events-none",
@@ -55,7 +55,7 @@ export default function Sidebar({
     >
       <div
         className={cn(
-          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-gray-200 transition-[translate] z-10",
+          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-gray-200 transition-[translate] z-[1]",
           open
             ? "translate-x-0"
             : "-translate-x-full rtl:translate-x-full delay-150",
