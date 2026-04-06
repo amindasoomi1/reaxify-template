@@ -42,7 +42,7 @@ export const queryClient = new QueryClient({
 export function syncList<TList, TDetail>(
   listKey: QueryKey,
   newItem: TDetail,
-  matchKeys: (keyof TDetail)[]
+  matchKeys: (keyof TDetail)[],
 ) {
   queryClient.setQueriesData<TList>({ queryKey: listKey }, (old) => {
     if (!old) return old;
@@ -67,13 +67,13 @@ export function syncList<TList, TDetail>(
   });
 }
 
-export function syncDetail<TDetail>(
+export function syncDetails<TDetail>(
   detailKey: QueryKey,
   newItem: TDetail,
-  updater?: (old: TDetail | undefined, item: TDetail) => TDetail
+  updater?: (old: TDetail | undefined, item: TDetail) => TDetail,
 ) {
   queryClient.setQueryData<TDetail>(detailKey, (old) =>
-    updater ? updater(old, newItem) : newItem
+    updater ? updater(old, newItem) : newItem,
   );
 }
 
