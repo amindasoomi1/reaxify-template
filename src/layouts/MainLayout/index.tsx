@@ -1,4 +1,4 @@
-import { ProfileProvider } from "@/providers";
+import { ErrorBoundaryProvider, ProfileProvider } from "@/providers";
 import { useState } from "react";
 import { Outlet } from "react-router";
 import { cn } from "reaxify/helpers";
@@ -28,29 +28,31 @@ export default function MainLayout() {
     setLgOpen((p) => !p);
   };
   return (
-    <ProfileProvider>
-      <div
-        className={cn(
-          "[--header-height:4rem] [--main-width:4.5rem] [--prime-width:14.375rem] [--layout-padding:1rem] transition-[padding]",
-          lgOpen
-            ? "lg:[--layout-padding:1.5rem]"
-            : "lg:[--layout-padding:4rem]",
-          lgOpen
-            ? "lg:ps-[calc(var(--main-width)+var(--prime-width))]"
-            : "lg:ps-(--main-width)",
-        )}
-      >
-        <Header onToggle={toggle} onToggleLg={toggleLg} />
-        <Outlet />
-        <Sidebar
-          open={open}
-          lgOpen={lgOpen}
-          onShow={show}
-          onHide={hide}
-          onShowLg={showLg}
-          onHideLg={hideLg}
-        />
-      </div>
-    </ProfileProvider>
+    <ErrorBoundaryProvider>
+      <ProfileProvider>
+        <div
+          className={cn(
+            "[--header-height:4rem] [--main-width:4.5rem] [--prime-width:14.375rem] [--layout-padding:1rem] transition-[padding]",
+            lgOpen
+              ? "lg:[--layout-padding:1.5rem]"
+              : "lg:[--layout-padding:4rem]",
+            lgOpen
+              ? "lg:ps-[calc(var(--main-width)+var(--prime-width))]"
+              : "lg:ps-(--main-width)",
+          )}
+        >
+          <Header onToggle={toggle} onToggleLg={toggleLg} />
+          <Outlet />
+          <Sidebar
+            open={open}
+            lgOpen={lgOpen}
+            onShow={show}
+            onHide={hide}
+            onShowLg={showLg}
+            onHideLg={hideLg}
+          />
+        </div>
+      </ProfileProvider>
+    </ErrorBoundaryProvider>
   );
 }

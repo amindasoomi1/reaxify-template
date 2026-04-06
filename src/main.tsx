@@ -12,7 +12,6 @@ import { registerSW } from "virtual:pwa-register";
 import App from "./App.tsx";
 import "./assets/css/index.css";
 import { i18n } from "./boot";
-import { ErrorBoundaryProvider } from "./providers";
 // declare module "reaxify/types" {
 //   interface ExtendBadgeVariant {}
 //   interface ExtendButtonVariant {}
@@ -75,12 +74,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           }}
         >
           <QueryClientProvider client={queryClient}>
-            <ErrorBoundaryProvider>
-              <App />
-            </ErrorBoundaryProvider>
+            <App />
           </QueryClientProvider>
         </ThemeProvider>
       </BrowserRouter>
     </I18nextProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

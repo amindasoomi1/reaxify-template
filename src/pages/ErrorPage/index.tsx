@@ -1,15 +1,35 @@
+import { Layout } from "@/layouts";
+import { useMemo } from "react";
 import { FallbackProps } from "react-error-boundary";
-import { Button } from "reaxify/components";
+import { Button, Card, Typography } from "reaxify/components";
 
 export default function ErrorPage({
   error,
   resetErrorBoundary,
 }: FallbackProps) {
-  const status = error?.response?.status;
+  const errorText = useMemo(() => {
+    const status = error?.response?.status ?? null;
+    if (status) return `There was an error! ${{ status }}`;
+    return error?.toString?.();
+  }, [error]);
   return (
-    <div className="w-full p-8 text-center">
-      There was an error! ({status})
-      <Button onClick={resetErrorBoundary}>Try again</Button>
-    </div>
+    <Layout>
+      <Layout.Body className="flex flex-col">
+        <Card dir="ltr" className="max-w-sm m-auto rounded-2xl p-3">
+          <Card.Body>
+            <Typography>{errorText}</Typography>
+          </Card.Body>
+          <Card.Footer>
+            <Button
+              type="button"
+              onClick={resetErrorBoundary}
+              className="w-full"
+            >
+              Try again
+            </Button>
+          </Card.Footer>
+        </Card>
+      </Layout.Body>
+    </Layout>
   );
 }
