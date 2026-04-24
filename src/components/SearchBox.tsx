@@ -21,7 +21,13 @@ export default function SearchBox({ className }: Props) {
         className,
       )}
     >
-      <Button type="submit" variant="text" color="dark" size="icon">
+      <Button
+        type="submit"
+        variant="text"
+        color="dark"
+        size="icon"
+        className="size-5"
+      >
         <Icon name="SearchNormal1" className="size-4 text-gray-700" />
       </Button>
       <input
