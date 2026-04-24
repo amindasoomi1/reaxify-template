@@ -8,6 +8,8 @@ export default function ErrorPage({
   resetErrorBoundary,
 }: FallbackProps) {
   const errorText = useMemo(() => {
+    // eslint-disable-next-line
+    // @ts-expect-error
     const status = error?.response?.status ?? null;
     if (status) return `There was an error! ${{ status }}`;
     return error?.toString?.();

@@ -1,5 +1,4 @@
 export { default as Icon } from "./Icon";
-export { default as IconButton } from "./IconButton";
 export { default as Image } from "./Image";
 export { default as Logo } from "./Logo";
 export { default as SearchBox } from "./SearchBox";

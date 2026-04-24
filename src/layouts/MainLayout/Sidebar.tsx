@@ -1,9 +1,9 @@
 import logo from "@/assets/logos/logo.svg";
-import { Icon, IconButton, Image } from "@/components";
+import { Icon, Image } from "@/components";
 import { appConfig, navItems } from "@/constants";
 import { Fragment, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Tooltip } from "reaxify/components";
+import { Button, Tooltip } from "reaxify/components";
 import { cn } from "reaxify/helpers";
 
 type Props = {
@@ -69,18 +69,19 @@ export default function Sidebar({
             return (
               <li key={e.label} className="flex items-center justify-center">
                 <Tooltip title={e.label} placement="end">
-                  <IconButton
+                  <Button
                     type="button"
                     variant="text"
                     color={active ? "primary" : "dark"}
                     className={cn(
                       "size-11 rounded-lg shadow-none",
-                      active ? "bg-primary/10" : "text-gray-500",
+                      active ? "bg-light-primary" : "text-gray-500",
                     )}
                     onClick={handleSetActiveGroupIndex(i)}
+                    size="icon"
                   >
                     <Icon name={e.icon} className="size-6" variant="Bulk" />
-                  </IconButton>
+                  </Button>
                 </Tooltip>
               </li>
             );
@@ -104,15 +105,16 @@ export default function Sidebar({
           <p className="flex-1 truncate tracking-wider text-base text-gray-800">
             {activeGroup?.label}
           </p>
-          <IconButton
+          <Button
             type="button"
             variant="text"
             color="dark"
+            size="icon"
             className="hidden lg:block"
             onClick={onHideLg}
           >
             <Icon name="ArrowLeft2" className="size-4" />
-          </IconButton>
+          </Button>
         </div>
         <div className="w-full flex-1 overflow-auto px-4">
           {activeGroup?.items?.map((e, i) => (

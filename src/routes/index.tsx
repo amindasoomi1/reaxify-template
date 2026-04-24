@@ -3,7 +3,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Onboarding from "@/pages/Onboarding";
 import PageNotFound from "@/pages/PageNotFound";
-import { RouteObject } from "react-router";
+import { RouteObject } from "react-router-dom";
 
 const routes: RouteObject[] = [
   {

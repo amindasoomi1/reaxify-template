@@ -1,8 +1,7 @@
 import { IconName, IconVariant } from "@/types";
 import * as IconSax from "iconsax-react";
-import { ComponentProps, useContext, useMemo } from "react";
+import { ComponentProps, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
-import { IconButtonContext } from "./IconButton";
 type IconProps = {
   name: IconName;
   variant?: IconVariant;
@@ -16,18 +15,13 @@ export default function Icon({
   size = "1em",
   ...props
 }: IconProps) {
-  const iconButtonContext = useContext(IconButtonContext);
   const Component = useMemo(() => IconSax[name], [name]);
   return (
     <Component
       variant={variant}
       size={size}
       color="currentColor"
-      className={twMerge(
-        "inline-flex text-current align-middle",
-        iconButtonContext?.iconClassName,
-        className
-      )}
+      className={twMerge("inline-flex text-current align-middle", className)}
       {...props}
     />
   );

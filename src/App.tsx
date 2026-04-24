@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Toaster } from "react-hot-toast";
-import { useRoutes } from "react-router";
+import { useRoutes } from "react-router-dom";
 import { appConfig } from "./constants";
 import routes from "./routes";
 

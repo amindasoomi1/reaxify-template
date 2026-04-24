@@ -35,7 +35,7 @@ export default function Login() {
           <Card.Header className="space-y-4">
             <Stack className="items-center gap-4">
               <Logo className="h-10" />
-              <Stack variant="vertical" className="flex-1">
+              <Stack direction="column" className="flex-1">
                 <Typography
                   variant="heading-5"
                   className="flex-1 text-gray-700"

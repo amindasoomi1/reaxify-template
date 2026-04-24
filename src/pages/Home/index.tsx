@@ -11,7 +11,7 @@ export default function Home() {
       value: "6.5K",
       percent: "4.5%",
       icon: "PresentionChart" as IconName,
-      bgClasses: "bg-info/10",
+      bgClasses: "bg-light-info",
       colorClasses: "text-info",
     },
     {
@@ -19,7 +19,7 @@ export default function Home() {
       value: "12K",
       percent: "7.5%",
       icon: "Profile2User" as IconName,
-      bgClasses: "bg-warning/10",
+      bgClasses: "bg-light-warning",
       colorClasses: "text-warning",
     },
     {
@@ -27,7 +27,7 @@ export default function Home() {
       value: "47K",
       percent: "8%",
       icon: "Box" as IconName,
-      bgClasses: "bg-success/10",
+      bgClasses: "bg-light-success",
       colorClasses: "text-success",
     },
     {
@@ -35,7 +35,7 @@ export default function Home() {
       value: "$128K",
       percent: "6.69",
       icon: "DollarCircle" as IconName,
-      bgClasses: "bg-secondary/10",
+      bgClasses: "bg-light-secondary",
       colorClasses: "text-secondary",
     },
   ];

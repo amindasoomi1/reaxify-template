@@ -3,7 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
-import { BrowserRouter } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "reaxify/providers";
 import "reaxify/style.css";
 // eslint-disable-next-line

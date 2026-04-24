@@ -1,6 +1,6 @@
 import { ErrorBoundaryProvider, ProfileProvider } from "@/providers";
 import { useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import { cn } from "reaxify/helpers";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
