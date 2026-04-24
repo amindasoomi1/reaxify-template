@@ -4,3 +4,4 @@ export { default as useFormatPrice } from "./useFormatPrice";
 export { default as useIsLogged } from "./useIsLogged";
 export { default as useLogout } from "./useLogout";
 export { default as useProfile } from "./useProfile";
+export { default as useStepper } from "./useStepper";
