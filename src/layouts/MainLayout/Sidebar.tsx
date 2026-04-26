@@ -3,7 +3,7 @@ import { Icon, Image } from "@/components";
 import { appConfig, navItems } from "@/constants";
 import { Fragment, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Button, Tooltip } from "reaxify/components";
+import { Button, Divider, Tooltip } from "reaxify/components";
 import { cn } from "reaxify/helpers";
 
 type Props = {
@@ -55,7 +55,7 @@ export default function Sidebar({
     >
       <div
         className={cn(
-          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-gray-200 transition-[translate] z-[1]",
+          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-border transition-[translate] z-[1]",
           open
             ? "translate-x-0"
             : "-translate-x-full rtl:translate-x-full delay-150",
@@ -132,7 +132,7 @@ export default function Sidebar({
                   </li>
                 ))}
               </ul>
-              <div className="w-full my-2.5 h-px bg-gray-200 dark:bg-dark-500 last:hidden" />
+              <Divider className="my-2.5 last:hidden" />
             </Fragment>
           ))}
         </div>

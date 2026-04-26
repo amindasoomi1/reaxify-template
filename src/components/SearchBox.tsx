@@ -17,7 +17,7 @@ export default function SearchBox({ className }: Props) {
     <form
       onSubmit={handleSubmit}
       className={twMerge(
-        "lg:flex items-center w-full h-8 border border-gray-200 hover:border-gray-400 transition-colors rounded-full px-3 gap-2 hidden",
+        "lg:flex items-center w-full h-8 border border-border hover:border-gray-400 transition-colors rounded-full px-3 gap-2 hidden",
         className,
       )}
     >

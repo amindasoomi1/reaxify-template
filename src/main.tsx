@@ -34,7 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ThemeProvider
           extendClasses={{
             card: { base: "shadow-soft" },
-            progress: { color: { primary: "bg-gray-200" } },
+            progress: { color: { primary: "bg-border" } },
             button: {
               color: {
                 primary: {
