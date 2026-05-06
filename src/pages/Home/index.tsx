@@ -1,8 +1,7 @@
 import { Icon } from "@/components";
 import { Layout } from "@/layouts";
-import { confirm } from "@/services/confirm";
 import { IconName } from "@/types";
-import { Button, Card, Typography } from "reaxify/components";
+import { Card, Typography } from "reaxify/components";
 import { cn } from "reaxify/helpers";
 
 export default function Home() {
@@ -40,10 +39,6 @@ export default function Home() {
       colorClasses: "text-secondary",
     },
   ];
-  const test = async () => {
-    await confirm();
-    console.log("Success");
-  };
   return (
     <Layout>
       <Layout.Body>
@@ -81,9 +76,6 @@ export default function Home() {
               </Card.Body>
             </Card>
           ))}
-          <Button type="button" onClick={test}>
-            Confirm test
-          </Button>
         </section>
       </Layout.Body>
     </Layout>
