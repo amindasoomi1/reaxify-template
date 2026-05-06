@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { useRoutes } from "react-router-dom";
 import { appConfig } from "./constants";
 import routes from "./routes";
+import { ConfirmProvider } from "./services/confirm";
 
 export default function App() {
   const elements = useRoutes(routes);
@@ -11,6 +12,7 @@ export default function App() {
       <title>{appConfig.title}</title>
       {elements}
       <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
+      <ConfirmProvider />
     </Fragment>
   );
 }
