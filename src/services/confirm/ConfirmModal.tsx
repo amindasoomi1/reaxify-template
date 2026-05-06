@@ -38,8 +38,20 @@ export default function ConfirmModal({
       ...cancelButton,
     },
   };
+  const handleClose = () => {
+    onClose()
+    onCancel?.('Closed!')
+  }
+  const handleOk = () => {
+    onClose()
+    onOk?.()
+  }
+  const handleCancel = () => {
+    onClose()
+    onCancel?.('Canceled!')
+  }
   return (
-    <Modal open={open} onClose={onClose} onExited={onExited}>
+    <Modal open={open} onClose={handleClose} onExited={onExited}>
       <Modal.Dialog>
         <Modal.Body className="space-y-1">
           <Typography
@@ -59,20 +71,18 @@ export default function ConfirmModal({
         <Modal.Footer className="flex items-center gap-2 *:flex-1">
           <Button
             type="button"
-            onClick={onOk}
+            onClick={handleOk}
             color={buttonConfig.okButton.color}
             variant={buttonConfig.okButton.variant}
-            closeModal
           >
             {buttonConfig.okButton.title}
           </Button>
           <Button
             autoFocus
             type="button"
-            onClick={onCancel}
+            onClick={handleCancel}
             color={buttonConfig.cancelButton.color}
             variant={buttonConfig.cancelButton.variant}
-            closeModal
           >
             {buttonConfig.cancelButton.title}
           </Button>

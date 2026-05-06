@@ -30,7 +30,7 @@ export function confirm(config: Omit<ConfirmConfig, "onOk" | "onCancel"> = {}) {
     confirmStore.set({
       ...config,
       onOk: () => resolve(true),
-      onCancel: () => reject("Cancelled!"),
+      onCancel: reject,
     });
   });
 }
