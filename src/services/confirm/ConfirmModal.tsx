@@ -40,7 +40,7 @@ export default function ConfirmModal({
   };
   const handleClose = () => {
     onClose()
-    onCancel?.('Closed!')
+    onCancel?.('closed')
   }
   const handleOk = () => {
     onClose()
@@ -48,7 +48,7 @@ export default function ConfirmModal({
   }
   const handleCancel = () => {
     onClose()
-    onCancel?.('Canceled!')
+    onCancel?.('canceled')
   }
   return (
     <Modal open={open} onClose={handleClose} onExited={onExited}>

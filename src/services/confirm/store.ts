@@ -1,5 +1,5 @@
 import { randomID } from "reaxify/helpers";
-import { ConfirmConfig, ConfirmItem } from "./types";
+import { ConfirmConfig, ConfirmItem, ConfirmResolve } from "./types";
 
 let confirms: ConfirmItem[] = [];
 const confirmListeners = new Set<VoidFunction>();
@@ -26,11 +26,11 @@ export const confirmStore = {
 };
 
 export function confirm(config: Omit<ConfirmConfig, "onOk" | "onCancel"> = {}) {
-  return new Promise<boolean>((resolve, reject) => {
+  return new Promise<ConfirmResolve>((resolve) => {
     confirmStore.set({
       ...config,
-      onOk: () => resolve(true),
-      onCancel: reject,
+      onOk: () => resolve({ confirmed: true, reason: "confirmed" }),
+      onCancel: (reason) => resolve({ confirmed: false, reason }),
     });
   });
 }

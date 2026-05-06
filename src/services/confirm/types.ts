@@ -7,6 +7,15 @@ export type ConfirmConfig = {
   okButton?: { title?: string; color?: Color; variant?: ButtonVariant };
   cancelButton?: { title?: string; color?: Color; variant?: ButtonVariant };
   onOk?: VoidFunction;
-  onCancel?: Dispatch<string>;
+  onCancel?: Dispatch<"canceled" | "closed">;
 };
 export type ConfirmItem = ConfirmConfig & { id: string };
+export type ConfirmResolve =
+  | {
+      confirmed: true;
+      reason: "confirmed";
+    }
+  | {
+      confirmed: false;
+      reason: "canceled" | "closed";
+    };

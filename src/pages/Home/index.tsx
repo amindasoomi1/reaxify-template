@@ -41,8 +41,9 @@ export default function Home() {
     },
   ];
   const test = async () => {
-    await confirm().catch(e => e === '')
-    console.log('Success');
+    const result = await confirm()
+    if (result.confirmed) console.log('Success');
+    else console.log(result)
 
   }
   return (
