@@ -11,7 +11,11 @@ import { ChildrenProps } from "reaxify/types";
 import { normalizeKeys } from "./helpers";
 import { SignalRNotificationCommand } from "./types";
 
-export default function SignalRProvider({ children }: ChildrenProps) {
+type Props = {
+  enabled?: boolean;
+} & ChildrenProps;
+
+export default function SignalRProvider({ enabled = true, children }: Props) {
   const accessToken = useTokenStore((s) => s.accessToken);
 
   const handleCommandReceived = useCallback(
@@ -33,7 +37,7 @@ export default function SignalRProvider({ children }: ChildrenProps) {
   );
 
   useEffect(() => {
-    if (!accessToken) return;
+    if (!accessToken || !enabled) return;
     const connection = new HubConnectionBuilder()
       .withUrl(`${appConfig.baseUrl}/app-hub`, {
         accessTokenFactory: () => accessToken,
@@ -71,6 +75,6 @@ export default function SignalRProvider({ children }: ChildrenProps) {
       console.log("🛑 SignalR connection stopped");
       connection.stop();
     };
-  }, [accessToken, handleCommandReceived]);
+  }, [accessToken, enabled, handleCommandReceived]);
   return <Fragment>{children}</Fragment>;
 }
