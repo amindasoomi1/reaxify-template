@@ -103,7 +103,7 @@ export default function Login() {
 
   return (
     <Layout>
-      <Layout.Body className="min-h-screen w-full p-0 lg:grid lg:grid-cols-2">
+      <Layout.Body className="min-h-svh w-full p-0 lg:grid lg:grid-cols-2">
         <section className="relative hidden flex-col justify-between overflow-hidden bg-primary p-10 text-white lg:flex">
           <div className="pointer-events-none absolute -inset-e-24 -top-24 size-72 rounded-full bg-white/10" />
           <div className="pointer-events-none absolute -bottom-16 -inset-s-16 size-56 rounded-full bg-white/5" />
@@ -223,7 +223,7 @@ export default function Login() {
           </Stack>
         </section>
 
-        <section className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-6 lg:p-10">
+        <section className="flex min-h-svh flex-col items-center justify-center p-4 sm:p-6 lg:p-10">
           <Stack
             direction="column"
             className="mb-6 w-full max-w-md gap-4 lg:hidden"
