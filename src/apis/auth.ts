@@ -1,10 +1,11 @@
 import { axios } from "@/boot";
-import { appConfig, queryKeys } from "@/constants";
+import { appConfig } from "@/constants";
+import { clearCacheData } from "@/helpers";
+import { invalidateQueries, queryKeys } from "@/infra/query-client";
 import { useProfileStore, useTokenStore } from "@/stores";
 import baseAxios from "axios";
 import { c } from "castium";
 import { cloneDeep } from "lodash";
-import { queryClient } from ".";
 
 export async function getProfile() {
   const url = "/profile";
@@ -22,7 +23,7 @@ export async function login(data: { email: string; password: string }) {
       accessToken: res.data.accessToken,
       refreshToken: res.data.refreshToken,
     });
-    queryClient.invalidateQueries({ queryKey: [queryKeys.profile] });
+    invalidateQueries([queryKeys.profile]);
     return res.data;
   });
   return token;
@@ -39,7 +40,5 @@ export async function refreshToken() {
   return token;
 }
 export async function logout() {
-  queryClient.clear();
-  useTokenStore.setState({ accessToken: null, refreshToken: null });
-  useProfileStore.setState({ profile: null });
+  clearCacheData();
 }

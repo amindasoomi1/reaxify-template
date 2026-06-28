@@ -1,4 +1,5 @@
-import { appConfig, languages } from "@/constants";
+import { languages } from "@/boot";
+import { appConfig } from "@/constants";
 import { isNil } from "lodash";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";

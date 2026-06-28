@@ -2,21 +2,11 @@ import { useIsLogged } from "@/hooks";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { useCallback, useEffect } from "react";
-import { useAxios } from "reaxify/axios";
 import firebaseConfig from "./config";
 import useFirebaseTokenStore from "./useTokenStore";
 
 export default function useFirebaseMessage() {
-  const [axios] = useAxios({ cancelDuplicatedRequests: false });
   const isLogged = useIsLogged();
-  const handleSetFirebaseToken = useCallback((token: string) => {
-    const url = "/users/update/firebase-token";
-    const body = token;
-    const config = { headers: { "Content-Type": "application/json" } };
-    axios.put(url, body, config).then(() => {
-      useFirebaseTokenStore.getState().setFirebaseToken(token);
-    });
-  }, []);
   const notificationHandler = useCallback(async () => {
     if (!isLogged) return;
     const firebaseToken = useFirebaseTokenStore.getState().firebaseToken;
@@ -27,7 +17,7 @@ export default function useFirebaseMessage() {
     if (!isGranted) return;
     if (!firebaseToken) {
       const token = await getToken(messaging);
-      handleSetFirebaseToken(token);
+      useFirebaseTokenStore.setState({ firebaseToken: token });
     }
     onMessage(messaging, (payload) => {
       const title = payload.notification?.title || payload.data?.title || "";
@@ -42,7 +32,7 @@ export default function useFirebaseMessage() {
       };
       new Notification(title, notificationOptions);
     });
-  }, [isLogged, handleSetFirebaseToken]);
+  }, [isLogged]);
   useEffect(() => {
     notificationHandler();
   }, [notificationHandler]);

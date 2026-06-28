@@ -1,17 +1,16 @@
-import { queryClient } from "@/apis";
+import "@/assets/css/index.css";
+import { i18n } from "@/boot";
+import { queryClient } from "@/infra/query-client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "reaxify/providers";
-import "reaxify/style.css";
 // eslint-disable-next-line
 // @ts-expect-error
 import { registerSW } from "virtual:pwa-register";
-import App from "./App.tsx";
-import "./assets/css/index.css";
-import { i18n } from "./boot";
+import App from "./App";
 // declare module "reaxify/types" {
 //   interface ExtendBadgeVariant {}
 //   interface ExtendButtonVariant {}
