@@ -9,7 +9,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { I18nextProvider } from "react-i18next";
-import { BrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "reaxify/providers";
 // eslint-disable-next-line
 // @ts-expect-error
@@ -32,56 +32,51 @@ registerSW({
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18n}>
-      <BrowserRouter>
-        <ThemeProvider
-          extendClasses={{
-            card: { base: "shadow-soft" },
-            button: {
-              color: {
-                primary: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-primary",
-                },
-                secondary: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-secondary",
-                },
-                info: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-info",
-                },
-                success: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-success",
-                },
-                warning: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-warning",
-                },
-                danger: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-danger",
-                },
-                dark: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-dark",
-                },
-                light: {
-                  solid:
-                    "ring-2 ring-transparent ring-offset-2 focus:ring-light",
-                },
+      <ThemeProvider
+        extendClasses={{
+          card: { base: "shadow-soft" },
+          button: {
+            color: {
+              primary: {
+                solid:
+                  "ring-2 ring-transparent ring-offset-2 focus:ring-primary",
+              },
+              secondary: {
+                solid:
+                  "ring-2 ring-transparent ring-offset-2 focus:ring-secondary",
+              },
+              info: {
+                solid: "ring-2 ring-transparent ring-offset-2 focus:ring-info",
+              },
+              success: {
+                solid:
+                  "ring-2 ring-transparent ring-offset-2 focus:ring-success",
+              },
+              warning: {
+                solid:
+                  "ring-2 ring-transparent ring-offset-2 focus:ring-warning",
+              },
+              danger: {
+                solid:
+                  "ring-2 ring-transparent ring-offset-2 focus:ring-danger",
+              },
+              dark: {
+                solid: "ring-2 ring-transparent ring-offset-2 focus:ring-dark",
+              },
+              light: {
+                solid: "ring-2 ring-transparent ring-offset-2 focus:ring-light",
               },
             },
-          }}
-        >
-          <QueryClientProvider client={queryClient}>
-            <title>{appConfig.title}</title>
-            <RouterProvider router={routes} />
-            <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
-            <ConfirmProvider />
-          </QueryClientProvider>
-        </ThemeProvider>
-      </BrowserRouter>
+          },
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          <title>{appConfig.title}</title>
+          <RouterProvider router={routes} />
+          <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
+          <ConfirmProvider />
+        </QueryClientProvider>
+      </ThemeProvider>
     </I18nextProvider>
   </React.StrictMode>,
 );
