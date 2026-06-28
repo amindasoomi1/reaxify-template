@@ -14,7 +14,8 @@
   "dependencies": {
     "@microsoft/signalr": "^10.0.0",
     "@react-input/mask": "^2.0.4",
-    "@tanstack/react-query": "^5.90.6",
+    "@tanstack/query-broadcast-client-experimental": "^5.101.2",
+    "@tanstack/react-query": "^5.101.2",
     "axios": "^1.11.0",
     "castium": "^1.0.30",
     "firebase": "^12.6.0",

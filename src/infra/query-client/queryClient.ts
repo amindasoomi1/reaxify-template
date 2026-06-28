@@ -1,6 +1,7 @@
 import { getAxiosHttpStatus, toastAxiosError } from "@/boot";
 import { QueryClient } from "@tanstack/react-query";
 import config from "./config";
+import { setupBroadcastQueryClient } from "./setupBroadcastQueryClient";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,5 +56,7 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+setupBroadcastQueryClient(queryClient);
 
 export default queryClient;

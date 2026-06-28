@@ -4,6 +4,7 @@ const config = {
   refetchOnWindowFocus: false,
   refetchOnReconnect: true,
   refetchOnMount: false,
+  broadcastChannel: "reaxify-template-query",
   retry: {
     delay: 1000,
     maxFailureCount: 4,
