@@ -1,18 +1,11 @@
 import { Fragment } from "react";
-import { Toaster } from "react-hot-toast";
-import { useRoutes } from "react-router-dom";
-import { appConfig } from "./constants";
-import { ConfirmProvider } from "./infra/confirm";
-import routes from "./routes";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 export default function App() {
-  const elements = useRoutes(routes);
   return (
     <Fragment>
-      <title>{appConfig.title}</title>
-      {elements}
-      <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
-      <ConfirmProvider />
+      <Outlet />
+      <ScrollRestoration />
     </Fragment>
   );
 }

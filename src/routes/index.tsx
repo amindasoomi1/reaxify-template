@@ -1,20 +1,27 @@
+import App from "@/App";
 import MainLayout from "@/layouts/MainLayout";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Onboarding from "@/pages/Onboarding";
 import PageNotFound from "@/pages/PageNotFound";
-import { RouteObject } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
-const routes: RouteObject[] = [
+const routes = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    element: <App />,
     children: [
-      { path: "", element: <Home /> },
-      { path: "onboarding", element: <Onboarding /> },
+      {
+        path: "/",
+        element: <MainLayout />,
+        children: [
+          { path: "", element: <Home /> },
+          { path: "onboarding", element: <Onboarding /> },
+        ],
+      },
+      { path: "login", element: <Login /> },
+      { path: "*", element: <PageNotFound /> },
     ],
   },
-  { path: "login", element: <Login /> },
-  { path: "*", element: <PageNotFound /> },
-];
+]);
 export default routes;
