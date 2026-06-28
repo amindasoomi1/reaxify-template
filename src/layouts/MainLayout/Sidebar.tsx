@@ -3,7 +3,7 @@ import { Icon, Image } from "@/components";
 import { appConfig, navItems } from "@/constants";
 import { Fragment, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Button, Divider, Tooltip } from "reaxify/components";
+import { Button, Divider, Toggle, Tooltip } from "reaxify/components";
 import { cn } from "reaxify/helpers";
 
 type Props = {
@@ -46,7 +46,7 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed flex inset-0 size-full z-[3] overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
+        "fixed flex inset-0 size-full z-3 overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
         open
           ? "bg-black/10 pointer-events-auto"
           : "bg-transparent pointer-events-none",
@@ -55,7 +55,7 @@ export default function Sidebar({
     >
       <div
         className={cn(
-          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-border transition-[translate] z-[1]",
+          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-border transition-[translate] z-1",
           open
             ? "translate-x-0"
             : "-translate-x-full rtl:translate-x-full delay-150",
@@ -68,21 +68,29 @@ export default function Sidebar({
             const active = i === activeGroupIndex;
             return (
               <li key={e.label} className="flex items-center justify-center">
-                <Tooltip title={e.label} placement="end">
-                  <Button
-                    type="button"
-                    variant="text"
-                    color={active ? "primary" : "dark"}
-                    className={cn(
-                      "size-11 rounded-lg shadow-none",
-                      active ? "bg-light-primary" : "text-gray-500",
-                    )}
-                    onClick={handleSetActiveGroupIndex(i)}
-                    size="icon"
-                  >
-                    <Icon name={e.icon} className="size-6" variant="Bulk" />
-                  </Button>
-                </Tooltip>
+                <Toggle anchor triggerOn="hover">
+                  <Toggle.Trigger>
+                    <Button
+                      type="button"
+                      variant="text"
+                      color={active ? "primary" : "dark"}
+                      className={cn(
+                        "size-11 rounded-lg shadow-none",
+                        active ? "bg-light-primary" : "text-gray-500",
+                      )}
+                      onClick={handleSetActiveGroupIndex(i)}
+                      size="icon"
+                    >
+                      <Icon name={e.icon} className="size-6" variant="Bulk" />
+                    </Button>
+                  </Toggle.Trigger>
+                  <Toggle.Content>
+                    <Tooltip placement="end" className="z-3">
+                      <Tooltip.Content>{e.label}</Tooltip.Content>
+                      <Tooltip.Arrow />
+                    </Tooltip>
+                  </Toggle.Content>
+                </Toggle>
               </li>
             );
           })}
@@ -124,7 +132,7 @@ export default function Sidebar({
                   <li key={e.to} className="w-full h-fit">
                     <NavLink
                       to={e.to}
-                      className="flex items-center w-full h-[2.125rem] text-[0.8125rem] text-gray-600 font-normal transition-colors hover:text-gray-900 [&.active]:text-primary [&.active]:font-medium"
+                      className="flex items-center w-full h-8.5 text-[0.8125rem] text-gray-600 font-normal transition-colors hover:text-gray-900 [&.active]:text-primary [&.active]:font-medium"
                       onClick={onHide}
                     >
                       {e.label}
