@@ -4,6 +4,7 @@ export { default as Logo } from "./Logo";
 export { default as SearchBox } from "./SearchBox";
 export { default as Select } from "./Select";
 export * as Status from "./Status";
+export { default as TableBodyRowsLoading } from "./TableBodyRowsLoading";
 export { default as Text } from "./Text";
 export { default as Textfield } from "./Textfield";
 export { default as TextfieldPrice } from "./TextfieldPrice";
