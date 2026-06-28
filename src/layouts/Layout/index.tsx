@@ -12,7 +12,7 @@ function Layout<E extends ElementType = "section">({
   return (
     <Component
       className={twMerge(
-        "layout relative w-full grid grid-rows-[auto_1fr_auto] min-h-[calc(100svh-var(--header-height,0px))] px-(--layout-padding,1rem) transition-[padding] mx-auto",
+        "layout relative w-full grid grid-rows-[auto_1fr_auto] min-h-[calc(100svh-var(--header-height,0px))] px-(--layout-padding,0) transition-[padding] mx-auto",
         className,
       )}
       {...props}

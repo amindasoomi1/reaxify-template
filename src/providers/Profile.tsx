@@ -13,7 +13,10 @@ export default function ProfileProvider({ children }: ChildrenProps) {
   //       <Spinner />
   //     </Stack>
   //   );
-  // if (isError) return <ErrorPage error={error} resetErrorBoundary={() => {}} />;
+  // if (isError)
+  //   return (
+  //     <ErrorPage error={error} resetErrorBoundary={() => {}} className="px-4" />
+  //   );
   // if (!data) return null;
 
   return <Fragment>{children}</Fragment>;

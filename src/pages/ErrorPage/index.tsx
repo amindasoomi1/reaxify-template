@@ -4,6 +4,7 @@ import { ReactNode, useMemo } from "react";
 import { FallbackProps } from "react-error-boundary";
 import { useNavigate } from "react-router-dom";
 import { Button, Spacer, Typography } from "reaxify/components";
+import { ClassNameProps } from "reaxify/types";
 
 type Data = {
   title: string;
@@ -16,7 +17,8 @@ type Data = {
 export default function ErrorPage({
   error,
   resetErrorBoundary,
-}: FallbackProps) {
+  className,
+}: FallbackProps & ClassNameProps) {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
@@ -109,7 +111,7 @@ export default function ErrorPage({
     }
   }, [error]);
   return (
-    <Layout>
+    <Layout className={className}>
       <Layout.Body className="flex flex-col gap-3">
         <Spacer />
         <Typography

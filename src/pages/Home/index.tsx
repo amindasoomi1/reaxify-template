@@ -123,13 +123,6 @@ const customers = [
     active: true,
   },
   {
-    name: "Emma Wilson",
-    email: "emma.w@email.com",
-    orders: 31,
-    spent: 6240,
-    active: true,
-  },
-  {
     name: "James Rodriguez",
     email: "j.rodriguez@email.com",
     orders: 7,
