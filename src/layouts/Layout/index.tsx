@@ -12,7 +12,7 @@ function Layout<E extends ElementType = "section">({
   return (
     <Component
       className={twMerge(
-        "layout relative w-full grid grid-rows-[auto_1fr_auto] min-h-[calc(100svh-var(--header-height,0px))] px-(--layout-padding) transition-[padding] mx-auto",
+        "layout relative w-full grid grid-rows-[auto_1fr_auto] min-h-[calc(100svh-var(--header-height,0px))] px-(--layout-padding,1rem) transition-[padding] mx-auto",
         className,
       )}
       {...props}
@@ -30,7 +30,7 @@ function Header({
   return (
     <header
       className={twMerge(
-        "layout-header sticky top-(--header-height) w-full bg-background py-4 z-[1] min-w-0 min-h-0",
+        "layout-header sticky top-(--header-height) w-full bg-background py-4 z-1 min-w-0 min-h-0",
         className,
       )}
       {...props}
@@ -63,7 +63,7 @@ function Footer({
   return (
     <div
       className={twMerge(
-        "layout-footer sticky bottom-0 w-full bg-background py-4 z-[1] min-w-0 min-h-0",
+        "layout-footer sticky bottom-0 w-full bg-background py-4 z-1 min-w-0 min-h-0",
         className,
       )}
       {...props}

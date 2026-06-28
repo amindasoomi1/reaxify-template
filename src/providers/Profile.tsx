@@ -2,9 +2,10 @@ import { Fragment } from "react/jsx-runtime";
 import { ChildrenProps } from "reaxify/types";
 
 export default function ProfileProvider({ children }: ChildrenProps) {
-  // const { isLoading } = useQuery({
+  // const { data, isLoading, isError, error } = useQuery({
   //   queryKey: [queryKeys.profile],
   //   queryFn: auth.getProfile,
+  //   throwOnError: false,
   // });
   // if (isLoading)
   //   return (
@@ -12,6 +13,8 @@ export default function ProfileProvider({ children }: ChildrenProps) {
   //       <Spinner />
   //     </Stack>
   //   );
+  // if (isError) return <ErrorPage error={error} resetErrorBoundary={() => {}} />;
   // if (!data) return null;
+
   return <Fragment>{children}</Fragment>;
 }

@@ -1,5 +1,5 @@
 import { useFirebaseTokenStore } from "@/infra/firebase";
-import { queryClient } from "@/infra/query-client";
+import { clearQueries } from "@/infra/query-client";
 import { useProfileStore, useTokenStore } from "@/stores";
 
 export default function clearCacheData() {
@@ -10,5 +10,5 @@ export default function clearCacheData() {
   useTokenStore.setState({ accessToken: null, refreshToken: null });
   useFirebaseTokenStore.setState({ firebaseToken: null });
 
-  queryClient.clear();
+  clearQueries();
 }
