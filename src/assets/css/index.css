@@ -32,7 +32,7 @@
   --color-dark-warning: color-mix(in srgb, var(--color-warning), black 40%);
   --color-dark-danger: color-mix(in srgb, var(--color-danger), black 40%);
 
-  --color-dark: #1e293b;
+  --color-dark: #314158;
   --color-light: #f8fafc;
   --color-background: #f1f5f9;
   --color-border: #e2e8f0;
