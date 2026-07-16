@@ -1,3 +1,5 @@
+import pkg from "../../package.json";
+
 const appConfig = {
   title: "Reaxify Template",
   description: "Vite + React-19 + TS + Tailwind-4",
@@ -7,5 +9,6 @@ const appConfig = {
   currency: import.meta.env.VITE_DEFAULT_CURRENCY as string,
   persistedStateVersion: 1,
   isProduction: import.meta.env.VITE_IS_PRODUCTION === "true",
+  version: pkg.version,
 };
 export default appConfig;

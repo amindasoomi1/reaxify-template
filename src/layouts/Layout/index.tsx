@@ -1,3 +1,4 @@
+import { whoami } from "@/constants";
 import { ElementType } from "react";
 import { ComponentPropsWithAs, ComponentPropsWithoutAs } from "reaxify/types";
 import { twMerge } from "tailwind-merge";
@@ -11,6 +12,8 @@ function Layout<E extends ElementType = "section">({
   const Component = as || "section";
   return (
     <Component
+      data-platform={whoami.name}
+      data-runtime={whoami.runtime}
       className={twMerge(
         "layout relative w-full grid grid-rows-[auto_1fr_auto] min-h-[calc(100svh-var(--header-height,0px))] px-(--layout-padding,0) transition-[padding] mx-auto",
         className,

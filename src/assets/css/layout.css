@@ -12,6 +12,16 @@
     var(--default-offset) + var(--navigation-button-height)
   );
 }
+:root:has(.layout[data-platform="ios-pwa"]) {
+  --offset-bottom: revert;
+}
+:root:has(.layout[data-runtime="native"]) {
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
 .layout {
   padding-top: var(--statusbar-height);
   padding-bottom: var(--navigation-button-height);

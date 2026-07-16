@@ -1,6 +1,6 @@
 import "@/assets/css/index.css";
 import { i18n } from "@/boot";
-import { appConfig } from "@/constants";
+import { appConfig, whoami } from "@/constants";
 import { ConfirmProvider } from "@/infra/confirm";
 import { queryClient } from "@/infra/query-client";
 import routes from "@/routes";
@@ -11,9 +11,8 @@ import { Toaster } from "react-hot-toast";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "reaxify/providers";
-// eslint-disable-next-line
-// @ts-expect-error
-import { registerSW } from "virtual:pwa-register";
+import { PwaUpdateProvider, registerPwa } from "./infra/pwa";
+
 // declare module "reaxify/types" {
 //   interface ExtendBadgeVariant {}
 //   interface ExtendButtonVariant {}
@@ -21,13 +20,8 @@ import { registerSW } from "virtual:pwa-register";
 //   interface ExtendColor {}
 //   interface ExtendSize {}
 // }
-registerSW({
-  immediate: true,
-  onNeedRefresh() {},
-  onOfflineReady() {
-    console.log("App ready to work offline");
-  },
-});
+
+if (whoami.isWeb) registerPwa();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -75,6 +69,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <RouterProvider router={routes} />
           <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
           <ConfirmProvider />
+          <PwaUpdateProvider />
         </QueryClientProvider>
       </ThemeProvider>
     </I18nextProvider>
