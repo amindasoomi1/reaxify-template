@@ -26,6 +26,7 @@ export default function Provider() {
     if (!whoami.isWeb) return;
     return subscribePwaNeedRefresh(() => setOpen(true));
   }, []);
+
   if (!whoami.isWeb) return null;
   return (
     <UpdateModal
