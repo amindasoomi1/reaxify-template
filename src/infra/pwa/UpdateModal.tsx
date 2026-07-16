@@ -1,5 +1,13 @@
+import { Icon } from "@/components";
 import { appConfig } from "@/constants";
-import { Button, Modal, Typography } from "reaxify/components";
+import {
+  Avatar,
+  Button,
+  Fill,
+  Modal,
+  Stack,
+  Typography,
+} from "reaxify/components";
 import { ToggleProps } from "reaxify/types";
 
 type Props = ToggleProps & {
@@ -8,7 +16,7 @@ type Props = ToggleProps & {
   isUpdating?: boolean;
 };
 
-export default function UpdateDrawer({
+export default function UpdateModal({
   open,
   onClose,
   onUpdate,
@@ -19,35 +27,61 @@ export default function UpdateDrawer({
     <Modal
       open={open}
       onClose={isUpdating ? () => {} : onClose}
-      draggable={!isUpdating}
+      preventClose={isUpdating}
     >
       <Modal.Dialog>
-        <Modal.Header>
-          <Typography variant="heading-6" className="font-semibold text-dark">
-            New version available
+        <Modal.Body className="space-y-4">
+          <Stack className="items-start gap-3">
+            <Avatar className="bg-light-primary">
+              <Avatar.Fallback>
+                <Icon name="Refresh" className="text-primary" />
+              </Avatar.Fallback>
+            </Avatar>
+            <Fill className="space-y-1">
+              <Typography
+                as="h6"
+                variant="body-1"
+                className="text-start font-bold text-dark"
+              >
+                Update available
+              </Typography>
+              <Typography
+                variant="body-2"
+                className="text-start font-light text-gray-500"
+              >
+                A newer version of the app is ready. Update now to get the
+                latest features and fixes.
+              </Typography>
+            </Fill>
+          </Stack>
+
+          <Typography
+            variant="body-2"
+            className="rounded-lg bg-gray-50 px-3 py-2.5 text-gray-500"
+          >
+            Current version{" "}
+            <span className="font-medium tabular-nums text-dark">
+              {appConfig.version}
+            </span>
           </Typography>
-        </Modal.Header>
-        <Modal.Body className="space-y-1">
-          <Typography variant="body-2" className="text-gray-600">
-            Current version:{" "}
-            <span className="font-iransans-en">{appConfig.version}</span>
-          </Typography>
-          <Typography variant="body-2" className="text-gray-600">
-            A new version is available on the server. Would you like to update
-            now?
-          </Typography>
+
+          {isUpdating && (
+            <Typography variant="body-2" className="text-center text-gray-500">
+              Applying update — the page will reload shortly.
+            </Typography>
+          )}
         </Modal.Body>
-        <Modal.Footer className="flex gap-2 pb-4">
+        <Modal.Footer className="flex items-center gap-2 *:flex-1">
           <Button
+            autoFocus
             type="button"
             variant="solid"
             color="primary"
             onClick={onUpdate}
             loading={isUpdating}
             disabled={isUpdating}
-            className="flex-1 text-sm font-normal"
           >
-            Yes, update
+            Update now
           </Button>
           <Button
             type="button"
@@ -55,7 +89,6 @@ export default function UpdateDrawer({
             color="dark"
             onClick={onDefer}
             disabled={isUpdating}
-            className="flex-1 text-sm font-normal"
           >
             Later
           </Button>

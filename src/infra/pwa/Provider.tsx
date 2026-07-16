@@ -29,7 +29,7 @@ export default function Provider() {
   if (!whoami.isWeb) return null;
   return (
     <UpdateModal
-      open={!open}
+      open={open}
       onClose={() => setOpen(false)}
       onUpdate={handleUpdate}
       onDefer={handleDefer}
