@@ -25,11 +25,11 @@ export default defineConfig({
       // eslint: { lintCommand: 'eslint "./src/**/*.{ts,tsx}"' }, // Optional
     }),
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
       includeAssets: ["apple-touch-icon.png", "favicon.ico"],
       workbox: {
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
-        skipWaiting: true,
+        skipWaiting: false,
         clientsClaim: true,
         runtimeCaching: [
           {
