@@ -3,8 +3,9 @@ import { Button, Modal, Typography } from "reaxify/components";
 import { ToggleProps } from "reaxify/types";
 
 type Props = ToggleProps & {
-  onUpdate: () => void;
+  onUpdate: () => void | Promise<void>;
   onDefer: () => void;
+  isUpdating?: boolean;
 };
 
 export default function UpdateDrawer({
@@ -12,22 +13,28 @@ export default function UpdateDrawer({
   onClose,
   onUpdate,
   onDefer,
+  isUpdating = false,
 }: Props) {
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal
+      open={open}
+      onClose={isUpdating ? () => {} : onClose}
+      draggable={!isUpdating}
+    >
       <Modal.Dialog>
         <Modal.Header>
           <Typography variant="heading-6" className="font-semibold text-dark">
-            نسخه جدید موجود است
+            New version available
           </Typography>
         </Modal.Header>
         <Modal.Body className="space-y-1">
           <Typography variant="body-2" className="text-gray-600">
-            نسخه فعلی:{" "}
+            Current version:{" "}
             <span className="font-iransans-en">{appConfig.version}</span>
           </Typography>
           <Typography variant="body-2" className="text-gray-600">
-            نسخه جدیدی روی سرور قرار گرفته. می‌خواهید الان به‌روزرسانی کنید؟
+            A new version is available on the server. Would you like to update
+            now?
           </Typography>
         </Modal.Body>
         <Modal.Footer className="flex gap-2 pb-4">
@@ -36,20 +43,21 @@ export default function UpdateDrawer({
             variant="solid"
             color="primary"
             onClick={onUpdate}
+            loading={isUpdating}
+            disabled={isUpdating}
             className="flex-1 text-sm font-normal"
-            closeDrawer
           >
-            بله، به‌روزرسانی
+            Yes, update
           </Button>
           <Button
             type="button"
             variant="solid"
             color="dark"
             onClick={onDefer}
+            disabled={isUpdating}
             className="flex-1 text-sm font-normal"
-            closeDrawer
           >
-            بعداً
+            Later
           </Button>
         </Modal.Footer>
       </Modal.Dialog>
