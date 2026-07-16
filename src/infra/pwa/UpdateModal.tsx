@@ -79,7 +79,6 @@ export default function UpdateModal({
             color="primary"
             onClick={onUpdate}
             loading={isUpdating}
-            disabled={isUpdating}
           >
             Update now
           </Button>
