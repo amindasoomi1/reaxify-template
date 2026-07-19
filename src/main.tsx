@@ -1,6 +1,6 @@
 import "@/assets/css/index.css";
 import { i18n } from "@/boot";
-import { appConfig, whoami } from "@/constants";
+import { appConfig } from "@/constants";
 import { ConfirmProvider } from "@/infra/confirm";
 import { queryClient } from "@/infra/query-client";
 import routes from "@/routes";
@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "reaxify/providers";
-import { PwaUpdateProvider, registerPwa } from "./infra/pwa";
+import { PwaUpdateProvider } from "./infra/pwa";
 
 // declare module "reaxify/types" {
 //   interface ExtendBadgeVariant {}
@@ -21,7 +21,6 @@ import { PwaUpdateProvider, registerPwa } from "./infra/pwa";
 //   interface ExtendSize {}
 // }
 
-if (whoami.isWeb) registerPwa();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
