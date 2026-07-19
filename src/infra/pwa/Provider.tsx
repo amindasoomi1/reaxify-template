@@ -1,7 +1,7 @@
 import { whoami } from "@/constants";
 import { useCallback, useEffect, useState } from "react";
 import { applyPwaUpdate, deferPwaUpdate, useRegisterSW } from "./register";
-import UpdateDrawer from "./UpdateDrawer";
+import UpdateModal from "./UpdateModal";
 
 export default function Provider() {
   const needReload = useRegisterSW();
@@ -27,7 +27,7 @@ export default function Provider() {
 
   if (!whoami.isWeb) return null;
   return (
-    <UpdateDrawer
+    <UpdateModal
       open={open}
       onClose={handleClose}
       onUpdate={handleUpdate}
