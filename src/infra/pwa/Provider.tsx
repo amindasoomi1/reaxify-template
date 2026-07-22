@@ -1,37 +1,30 @@
 import { whoami } from "@/constants";
-import { useCallback, useEffect, useState } from "react";
-import { applyPwaUpdate, deferPwaUpdate, useRegisterSW } from "./register";
+import { useCallback, useState, useSyncExternalStore } from "react";
+import { applyPwaUpdate, deferPwaUpdate, serviceWorkerStore } from "./register";
 import UpdateModal from "./UpdateModal";
 
 export default function Provider() {
-  const needReload = useRegisterSW();
-  const [open, setOpen] = useState(false);
+  const needReload = useSyncExternalStore(
+    serviceWorkerStore.subscribe,
+    serviceWorkerStore.get,
+    () => false,
+  );
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleClose = useCallback(() => {
-    setOpen(false);
-  }, []);
   const handleUpdate = useCallback(() => {
     setIsUpdating(true);
     applyPwaUpdate();
   }, []);
   const handleDefer = useCallback(() => {
-    setOpen(false);
     deferPwaUpdate();
   }, []);
-
-  useEffect(() => {
-    if (!whoami.isWeb) return;
-    setOpen(needReload);
-  }, [needReload]);
 
   if (!whoami.isWeb) return null;
   return (
     <UpdateModal
-      open={open}
-      onClose={handleClose}
+      open={needReload}
+      onClose={handleDefer}
       onUpdate={handleUpdate}
-      onDefer={handleDefer}
       isUpdating={isUpdating}
     />
   );

@@ -11,8 +11,7 @@ import {
 import { ToggleProps } from "reaxify/types";
 
 type Props = ToggleProps & {
-  onUpdate: () => void | Promise<void>;
-  onDefer: () => void;
+  onUpdate: VoidFunction;
   isUpdating?: boolean;
 };
 
@@ -20,7 +19,6 @@ export default function UpdateModal({
   open,
   onClose,
   onUpdate,
-  onDefer,
   isUpdating = false,
 }: Props) {
   return (
@@ -82,7 +80,6 @@ export default function UpdateModal({
             type="button"
             variant="solid"
             color="dark"
-            onClick={onDefer}
             disabled={isUpdating}
             closeModal
           >
