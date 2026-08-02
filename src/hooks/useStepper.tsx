@@ -25,8 +25,10 @@ export default function useStepper<T>(
     throw new Error("useStepper: steps must be a non-empty array");
   }
 
+  const initialStepIndex = options?.initialStepIndex ?? 0;
+
   const [activeStepIndex, setActiveStepIndex, reset] = usePersistedState(
-    options?.initialStepIndex ?? 0,
+    initialStepIndex,
     { name: options.name, storage: "sessionStorage" },
   );
 
@@ -50,10 +52,10 @@ export default function useStepper<T>(
 
     if (!canProceed) return;
     if (isLastStep) return actions?.onCompleted?.();
-    console.log(isLastStep);
     setActiveStepIndex((p) => Math.min(p + 1, lastStepIndex));
   };
 
+  const goToFirst = () => setActiveStepIndex(initialStepIndex);
   const goToLast = () => setActiveStepIndex(lastStepIndex);
   const hasNext = () => !isLastStep;
   const hasPrev = () => !isFirstStep;
@@ -64,7 +66,7 @@ export default function useStepper<T>(
       prev,
       next,
       goTo,
-      goToFirst: reset,
+      goToFirst,
       goToLast,
       hasNext,
       hasPrev,
