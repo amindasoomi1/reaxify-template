@@ -41,6 +41,10 @@
   animation-fill-mode: both;
 }
 
+/* [data-view-transition-name] {
+  view-transition-name: attr(data-view-transition-name type(<custom-ident>));
+} */
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),
