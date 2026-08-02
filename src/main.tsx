@@ -1,17 +1,14 @@
 import "@/assets/css/index.css";
 import { i18n } from "@/boot";
-import { appConfig, whoami } from "@/constants";
-import { ConfirmProvider } from "@/infra/confirm";
+import { whoami } from "@/constants";
 import { queryClient } from "@/infra/query-client";
-import routes from "@/routes";
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Toaster } from "react-hot-toast";
 import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "reaxify/providers";
-import { PwaUpdateProvider, registerServiceWorker } from "./infra/pwa";
+import { registerServiceWorker } from "./infra/pwa";
+import { RouterProvider } from "./providers";
 
 // declare module "reaxify/types" {
 //   interface ExtendBadgeVariant {}
@@ -65,11 +62,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         }}
       >
         <QueryClientProvider client={queryClient}>
-          <title>{appConfig.title}</title>
-          <RouterProvider router={routes} />
-          <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
-          <ConfirmProvider />
-          <PwaUpdateProvider />
+          <RouterProvider />
         </QueryClientProvider>
       </ThemeProvider>
     </I18nextProvider>
