@@ -1,5 +1,5 @@
 import { Icon } from "@/components";
-import { useStepper } from "@/hooks";
+import { useObjectState, useStepper } from "@/hooks";
 import { Layout } from "@/layouts";
 import { IconName } from "@/types";
 import {
@@ -48,8 +48,7 @@ type Step = {
 type Context = {
   data: Data;
   setData: Dispatch<SetStateAction<Data>>;
-  // eslint-disable-next-line
-  handleSetData: (key: keyof Data) => (value: any) => void;
+  handleSetData: ReturnType<typeof useObjectState<Data>>;
 };
 
 export const OnboardingContext = createContext<Context>({
@@ -120,12 +119,7 @@ export default function Onboarding() {
     },
     { name: "onboarding-data", storage: "sessionStorage" },
   );
-  const handleSetData = (key: keyof Data) => {
-    // eslint-disable-next-line
-    return (value: any) => {
-      setData((p) => ({ ...p, [key]: value }));
-    };
-  };
+  const handleSetData = useObjectState(setData);
 
   const sendCode = () => {
     return true;

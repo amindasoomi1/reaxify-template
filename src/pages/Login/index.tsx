@@ -1,6 +1,7 @@
 import { auth } from "@/apis";
 import { Icon, Logo, Textfield } from "@/components";
 import { appConfig, rules } from "@/constants";
+import { useObjectState } from "@/hooks";
 import { Layout } from "@/layouts";
 import { IconName } from "@/types";
 import { useMutation } from "@tanstack/react-query";
@@ -86,15 +87,10 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const handleSetData = useObjectState(setData);
   const [rememberMe, setRememberMe] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
-  const handleSetData = (key: keyof typeof data) => {
-    // eslint-disable-next-line
-    return (value: any) => {
-      setData((p) => ({ ...p, [key]: value }));
-    };
-  };
   const submit = () => {
     mutate(data);
   };
