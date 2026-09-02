@@ -104,7 +104,7 @@ export default function Login() {
           <div className="pointer-events-none absolute -inset-e-24 -top-24 size-72 rounded-full bg-white/10" />
           <div className="pointer-events-none absolute -bottom-16 -inset-s-16 size-56 rounded-full bg-white/5" />
 
-          <Stack direction="column" className="relative z-[1] gap-8">
+          <Stack direction="column" className="relative z-1 gap-8">
             <Logo className="h-9 brightness-0 invert" />
             <Stack direction="column" className="gap-3">
               <Typography variant="heading-3" className="text-white">
@@ -138,7 +138,7 @@ export default function Login() {
             </Stack>
           </Stack>
 
-          <Stack direction="column" className="relative z-[1] gap-6">
+          <Stack direction="column" className="relative z-1 gap-6">
             <div className="grid grid-cols-3 gap-4">
               {stats.map((stat) => (
                 <div
