@@ -419,7 +419,9 @@ export default function Home() {
                     </Avatar.Fallback>
                   </Avatar>
                 ))}
-                <Avatar.Count>+8</Avatar.Count>
+                <Avatar size="sm">
+                  <Avatar.Count>+8</Avatar.Count>
+                </Avatar>
               </Avatar.Group>
             </Card.Header>
             <Card.Body className="p-0">
