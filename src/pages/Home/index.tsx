@@ -297,7 +297,7 @@ export default function Home() {
                 <Stack
                   key={department.name}
                   direction="column"
-                  className="gap-2"
+                  className="gap-2 animate-card-enter"
                 >
                   <Stack className="items-center justify-between gap-2">
                     <Typography variant="body-2">{department.name}</Typography>
@@ -405,7 +405,10 @@ export default function Home() {
             <Card.Body>
               <Stack direction="column" className="gap-5">
                 {activities.map((activity) => (
-                  <Stack key={activity.title} className="items-start gap-3">
+                  <Stack
+                    key={activity.title}
+                    className="items-start gap-3 animate-card-enter"
+                  >
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gray-100">
                       <Icon
                         name={activity.icon}
