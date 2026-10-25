@@ -8,12 +8,12 @@
 }
 
 @theme {
-  --color-primary: #0f3b99;
-  --color-secondary: #4b5563;
-  --color-success: #15803d;
-  --color-info: #0284c7;
-  --color-warning: #ea580c;
-  --color-danger: #b91c1c;
+  --color-primary: #6366f1;
+  --color-secondary: #64748b;
+  --color-success: #10b981;
+  --color-info: #06b6d4;
+  --color-warning: #f59e0b;
+  --color-danger: #f43f5e;
 
   --color-light-primary: color-mix(in srgb, var(--color-primary), white 90%);
   --color-light-secondary: color-mix(
