@@ -31,7 +31,7 @@ export default function MainLayout() {
     <ProfileProvider>
       <div
         className={cn(
-          "[--header-height:4rem] [--main-width:4.5rem] [--prime-width:14.375rem] [--layout-padding:1rem] transition-[padding]",
+          "[--header-height:3.75rem] [--main-width:4rem] [--prime-width:13.5rem] [--layout-padding:1rem] transition-[padding]",
           lgOpen
             ? "lg:[--layout-padding:1.5rem]"
             : "lg:[--layout-padding:4rem]",

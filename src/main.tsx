@@ -25,8 +25,25 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <I18nextProvider i18n={i18n}>
       <ThemeProvider
         extendClasses={{
-          table: { body: { base: "*:animate-card-enter" } },
-          card: { base: "shadow-soft" },
+          table: {
+            body: { base: "*:animate-card-enter" },
+            header: { base: "bg-gray-50/80" },
+            headerCell: {
+              base: "py-2.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-gray-500",
+            },
+            dataCell: { base: "py-2.5 text-[0.8125rem]" },
+            row: { hover: "hover:bg-gray-50" },
+          },
+          card: {
+            base: "rounded-card border border-border shadow-soft",
+            header: { base: "px-5 pt-5 pb-1" },
+            body: { base: "p-5" },
+            footer: { base: "px-5 py-3" },
+          },
+          button: { base: "rounded-lg" },
+          badge: { base: "rounded-full font-semibold" },
+          inputGroup: { stack: { base: "rounded-lg" } },
+          progress: { base: "h-1.5" },
           // button: {
           //   color: {
           //     primary: {

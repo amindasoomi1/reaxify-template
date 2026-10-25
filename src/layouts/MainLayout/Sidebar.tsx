@@ -48,22 +48,24 @@ export default function Sidebar({
       className={cn(
         "fixed flex inset-0 size-full z-3 overflow-hidden transition-colors [--ratio:-1] rtl:[--ratio:1]",
         open
-          ? "bg-black/10 pointer-events-auto"
+          ? "bg-gray-950/20 backdrop-blur-[2px] pointer-events-auto"
           : "bg-transparent pointer-events-none",
         "lg:bg-transparent lg:pointer-events-none",
       )}
     >
       <div
         className={cn(
-          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3.5 bg-white border-e border-border transition-[translate] z-1",
+          "relative w-(--main-width) h-full flex flex-col items-center justify-start py-3 bg-dark transition-[translate] z-1",
           open
             ? "translate-x-0"
             : "-translate-x-full rtl:translate-x-full delay-150",
           "lg:translate-x-0 rtl:lg:translate-x-0 lg:pointer-events-auto",
         )}
       >
-        <Image src={logo} alt={appConfig.title} className="block size-10" />
-        <ul className="w-full flex-1 space-y-4 lg:space-y-3 xl:pt-5 2xl:space-y-4 pt-5 overflow-auto">
+        <div className="flex items-center justify-center size-9 rounded-xl bg-white">
+          <Image src={logo} alt={appConfig.title} className="block size-5" />
+        </div>
+        <ul className="w-full flex-1 space-y-1.5 pt-6 overflow-auto">
           {navItems.map((e, i) => {
             const active = i === activeGroupIndex;
             return (
@@ -73,15 +75,17 @@ export default function Sidebar({
                     <Button
                       type="button"
                       variant="text"
-                      color={active ? "primary" : "dark"}
+                      color={active ? "primary" : "light"}
                       className={cn(
-                        "size-11 rounded-lg shadow-none",
-                        active ? "bg-light-primary" : "text-gray-500",
+                        "size-9 rounded-xl shadow-none transition-colors",
+                        active
+                          ? "bg-accent text-dark hover:bg-accent"
+                          : "text-gray-400 hover:text-white hover:bg-white/10",
                       )}
                       onClick={handleSetActiveGroupIndex(i)}
                       size="icon"
                     >
-                      <Icon name={e.icon} className="size-6" variant="Bulk" />
+                      <Icon name={e.icon} className="size-[1.125rem]" variant="Bulk" />
                     </Button>
                   </Toggle.Trigger>
                   <Toggle.Content>
@@ -99,7 +103,7 @@ export default function Sidebar({
       </div>
       <div
         className={cn(
-          "w-(--prime-width) h-full flex flex-col items-start justify-start bg-white transition-[translate]",
+          "w-(--prime-width) h-full flex flex-col items-start justify-start bg-white border-e border-border transition-[translate]",
           open
             ? "translate-x-0 delay-150"
             : "translate-x-[calc(var(--ratio)*(100%+var(--main-width)))]",
@@ -109,8 +113,8 @@ export default function Sidebar({
             : "lg:translate-x-[calc(var(--ratio)*(100%+var(--main-width)))]",
         )}
       >
-        <div className="w-full h-16 flex items-center gap- px-4">
-          <p className="flex-1 truncate tracking-wider text-base text-gray-800">
+        <div className="w-full h-(--header-height) flex items-center gap-2 px-4">
+          <p className="flex-1 truncate text-sm font-semibold text-gray-900">
             {activeGroup?.label}
           </p>
           <Button
@@ -124,15 +128,15 @@ export default function Sidebar({
             <Icon name="ArrowLeft2" className="size-4" />
           </Button>
         </div>
-        <div className="w-full flex-1 overflow-auto px-4">
+        <div className="w-full flex-1 overflow-auto px-2.5 pt-1">
           {activeGroup?.items?.map((e, i) => (
             <Fragment key={i}>
-              <ul className="w-full">
+              <ul className="w-full space-y-0.5">
                 {e.map((e) => (
                   <li key={e.to} className="w-full h-fit">
                     <NavLink
                       to={e.to}
-                      className="flex items-center w-full h-8.5 text-[0.8125rem] text-gray-600 font-normal transition-colors hover:text-gray-900 [&.active]:text-primary [&.active]:font-medium"
+                      className="flex items-center gap-2 w-full h-8 px-2.5 rounded-lg text-[0.8125rem] text-gray-600 font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 before:size-1 before:rounded-full before:bg-gray-300 before:transition-colors [&.active]:bg-light-primary [&.active]:text-primary [&.active]:before:bg-primary"
                       onClick={onHide}
                     >
                       {e.label}
@@ -140,7 +144,7 @@ export default function Sidebar({
                   </li>
                 ))}
               </ul>
-              <Divider className="my-2.5 last:hidden" />
+              <Divider className="my-2 mx-2.5 last:hidden" />
             </Fragment>
           ))}
         </div>

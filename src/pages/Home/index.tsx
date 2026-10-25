@@ -21,23 +21,23 @@ const stats = [
     change: "+12.5%",
     icon: "Profile2User" as IconName,
     color: "text-primary",
-    bg: "bg-blue-50",
+    bg: "bg-light-primary",
   },
   {
     title: "Present Today",
     value: "215",
     change: "+4.8%",
     icon: "UserTick" as IconName,
-    color: "text-emerald-600",
-    bg: "bg-emerald-50",
+    color: "text-success",
+    bg: "bg-light-success",
   },
   {
     title: "On Leave",
     value: "18",
     change: "-2.4%",
     icon: "Calendar" as IconName,
-    color: "text-amber-600",
-    bg: "bg-amber-50",
+    color: "text-warning",
+    bg: "bg-light-warning",
   },
   {
     title: "Total Payroll",
@@ -134,50 +134,79 @@ export default function Home() {
 
   return (
     <Layout>
-      <Layout.Body className="min-h-screen space-y-6 p-4 sm:p-6 lg:p-8">
+      <Layout.Body className="space-y-4 py-4 lg:py-5">
         {/* Header */}
-        <Stack className="items-center justify-between gap-4">
-          <Stack direction="column" className="gap-1">
-            <Typography variant="heading-4">HR Dashboard</Typography>
-            <Typography variant="body-2" className="text-gray-500">
+        <Stack className="flex-wrap items-end justify-between gap-4">
+          <Stack direction="column" className="gap-0.5">
+            <Typography
+              variant="heading-5"
+              className="font-bold tracking-tight"
+            >
+              HR Dashboard
+            </Typography>
+            <Typography variant="body-3" className="text-gray-500">
               Monitor your team and manage your workforce.
             </Typography>
           </Stack>
 
-          {/* <Button color="primary" size="sm">
-            <Icon name="Export" className="size-4" />
-            Export Report
-          </Button> */}
+          <Stack className="gap-2">
+            <Button variant="outline" color="dark" size="sm" className="bg-white">
+              <Icon name="DocumentDownload" className="size-4" />
+              Export
+            </Button>
+            <Button color="dark" size="sm">
+              <Icon name="Add" className="size-4" />
+              Add
+            </Button>
+          </Stack>
         </Stack>
 
         {/* Statistics */}
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {stats.map((item) => (
             <Card key={item.title} className="animate-card-enter glass-card">
-              <Card.Body className="p-5">
+              <Card.Body className="p-4">
                 <Stack className="items-start justify-between gap-3">
-                  <Stack direction="column" className="min-w-0 gap-3">
-                    <Typography variant="body-2" className="text-gray-500">
+                  <Stack direction="column" className="min-w-0 gap-1.5">
+                    <Typography
+                      variant="body-3"
+                      className="font-medium text-gray-500"
+                    >
                       {item.title}
                     </Typography>
 
-                    <Typography variant="heading-3">{item.value}</Typography>
+                    <Typography
+                      variant="heading-4"
+                      className="font-bold tracking-tight"
+                    >
+                      {item.value}
+                    </Typography>
 
-                    <Typography variant="body-3" className="text-emerald-600">
-                      {item.change}{" "}
-                      <span className="text-gray-400">vs last month</span>
+                    <Typography variant="body-3" className="text-gray-400">
+                      <span
+                        className={cn(
+                          "me-1 inline-flex rounded-full px-1.5 text-[0.6875rem] font-semibold",
+                          item.change.startsWith("-")
+                            ? "bg-light-danger text-danger"
+                            : "bg-light-success text-success",
+                        )}
+                      >
+                        {item.change}
+                      </span>
+                      vs last month
                     </Typography>
                   </Stack>
 
                   <div
                     className={cn(
-                      "flex size-12 shrink-0 items-center justify-center rounded-2xl",
+                      "flex size-9 shrink-0 items-center justify-center rounded-full",
                       item.bg,
                     )}
                   >
                     <Icon
                       name={item.icon}
-                      className={cn("size-6", item.color)}
+                      className={cn("size-[1.125rem]", item.color)}
+                      variant="Bulk"
                     />
                   </div>
                 </Stack>
@@ -187,12 +216,14 @@ export default function Home() {
         </section>
 
         {/* Main content */}
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+        <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
           {/* Employee attendance */}
           <Card className="animate-card-enter glass-card xl:col-span-2">
             <Card.Header className="flex items-center justify-between gap-3">
               <Stack direction="column" className="gap-1">
-                <Typography variant="heading-6">Employee Attendance</Typography>
+                <Typography variant="body-1" className="font-semibold">
+                  Employee Attendance
+                </Typography>
                 <Typography variant="body-3" className="text-gray-500">
                   Daily attendance overview
                 </Typography>
@@ -200,10 +231,11 @@ export default function Home() {
 
               <Button variant="outline" color="dark" size="sm">
                 View All
+                <Icon name="ArrowRight2" className="size-4" />
               </Button>
             </Card.Header>
 
-            <Card.Body className="p-0">
+            <Card.Body className="p-0 pt-2">
               <Table.Container>
                 <Table hover>
                   <Table.Header>
@@ -220,8 +252,8 @@ export default function Home() {
                       <Table.Row key={employee.name}>
                         <Table.DataCell>
                           <Stack className="items-center gap-3">
-                            <Avatar size="md">
-                              <Avatar.Fallback>
+                            <Avatar size="sm">
+                              <Avatar.Fallback className="bg-light-primary text-primary text-[0.625rem] font-semibold">
                                 {getInitials(employee.name)}
                               </Avatar.Fallback>
                             </Avatar>
@@ -285,14 +317,16 @@ export default function Home() {
           <Card className="animate-card-enter glass-card">
             <Card.Header>
               <Stack direction="column" className="gap-1">
-                <Typography variant="heading-6">Departments</Typography>
+                <Typography variant="body-1" className="font-semibold">
+                  Departments
+                </Typography>
                 <Typography variant="body-3" className="text-gray-500">
                   Employee distribution
                 </Typography>
               </Stack>
             </Card.Header>
 
-            <Card.Body className="space-y-6">
+            <Card.Body className="space-y-4">
               {departments.map((department) => (
                 <Stack
                   key={department.name}
@@ -327,12 +361,14 @@ export default function Home() {
         </section>
 
         {/* Bottom content */}
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+        <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
           {/* Payroll */}
           <Card className="animate-card-enter glass-card xl:col-span-2">
             <Card.Header className="flex items-center justify-between gap-3">
               <Stack direction="column" className="gap-1">
-                <Typography variant="heading-6">Payroll Overview</Typography>
+                <Typography variant="body-1" className="font-semibold">
+                  Payroll Overview
+                </Typography>
                 <Typography variant="body-3" className="text-gray-500">
                   October 2026
                 </Typography>
@@ -343,47 +379,54 @@ export default function Home() {
               </Badge>
             </Card.Header>
 
-            <Card.Body className="space-y-5">
-              <div className="rounded-2xl bg-[#EEF2FF] p-5">
-                <Typography variant="body-2" className="text-gray-500">
+            <Card.Body className="space-y-4">
+              <div className="highlight-card rounded-xl p-4">
+                <Typography variant="body-2" className="text-white/60">
                   Total payroll
                 </Typography>
 
-                <Typography variant="heading-3" className="mt-2 text-primary">
+                <Typography
+                  variant="heading-4"
+                  className="mt-1 font-bold tracking-tight text-white"
+                >
                   {formatPrice(84500)}
                 </Typography>
 
-                <Stack className="mt-4 items-center justify-between gap-2">
-                  <Typography variant="body-3" className="text-gray-500">
+                <Stack className="mt-3 items-center justify-between gap-2">
+                  <Typography variant="body-3" className="text-white/60">
                     Monthly budget
                   </Typography>
-                  <Typography variant="body-3" className="font-medium">
+                  <Typography variant="body-3" className="font-semibold">
                     {formatPrice(100000)}
                   </Typography>
                 </Stack>
 
-                <Progress value={84.5} color="primary" className="mt-2" />
+                <Progress
+                  value={84.5}
+                  color="light"
+                  className="mt-2 text-accent"
+                />
 
-                <Typography variant="body-3" className="mt-2 text-gray-500">
+                <Typography variant="body-3" className="mt-2 text-white/60">
                   84.5% of the monthly budget
                 </Typography>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-gray-100 p-4">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="rounded-xl bg-gray-50 border border-border p-3">
                   <Typography variant="body-3" className="text-gray-500">
                     Average salary
                   </Typography>
-                  <Typography variant="heading-5" className="mt-2">
+                  <Typography variant="heading-6" className="mt-1 font-bold">
                     {formatPrice(3407)}
                   </Typography>
                 </div>
 
-                <div className="rounded-xl border border-gray-100 p-4">
+                <div className="rounded-xl bg-gray-50 border border-border p-3">
                   <Typography variant="body-3" className="text-gray-500">
                     Pending payments
                   </Typography>
-                  <Typography variant="heading-5" className="mt-2">
+                  <Typography variant="heading-6" className="mt-1 font-bold">
                     {formatPrice(6200)}
                   </Typography>
                 </div>
@@ -395,7 +438,9 @@ export default function Home() {
           <Card className="animate-card-enter glass-card">
             <Card.Header>
               <Stack direction="column" className="gap-1">
-                <Typography variant="heading-6">Recent Activity</Typography>
+                <Typography variant="body-1" className="font-semibold">
+                  Recent Activity
+                </Typography>
                 <Typography variant="body-3" className="text-gray-500">
                   Latest updates from your team
                 </Typography>
@@ -403,16 +448,17 @@ export default function Home() {
             </Card.Header>
 
             <Card.Body>
-              <Stack direction="column" className="gap-5">
+              <Stack direction="column" className="gap-4">
                 {activities.map((activity) => (
                   <Stack
                     key={activity.title}
                     className="items-start gap-3 animate-card-enter"
                   >
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gray-100">
+                    <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-light-primary">
                       <Icon
                         name={activity.icon}
-                        className="size-5 text-gray-600"
+                        className="size-4 text-primary"
+                        variant="Bulk"
                       />
                     </div>
 
@@ -434,7 +480,7 @@ export default function Home() {
               </Stack>
             </Card.Body>
 
-            <Card.Footer className="border-t">
+            <Card.Footer className="border-t border-border">
               <Button
                 variant="text"
                 color="primary"

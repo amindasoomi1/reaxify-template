@@ -17,7 +17,7 @@ export default function SearchBox({ className }: Props) {
     <form
       onSubmit={handleSubmit}
       className={twMerge(
-        "lg:flex items-center w-full h-8 border border-border hover:border-gray-400 transition-colors rounded-full px-3 gap-2 hidden",
+        "lg:flex items-center w-full h-8 bg-white border border-border hover:border-gray-300 focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/10 transition-[border-color,box-shadow] rounded-full px-3 gap-2 hidden",
         className,
       )}
     >
@@ -32,8 +32,8 @@ export default function SearchBox({ className }: Props) {
       </Button>
       <input
         type="text"
-        className="flex-1 focus:outline-none text-sm font-medium text-gray-700 placeholder:text-gray-400"
-        placeholder="Search here..."
+        className="flex-1 focus:outline-none text-xs font-medium text-gray-700 placeholder:text-gray-400"
+        placeholder="Search anything..."
       />
     </form>
   );
