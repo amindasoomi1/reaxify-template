@@ -21,12 +21,12 @@
 }
 
 ::view-transition-group(*) {
-  animation-duration: 300ms;
+  animation-duration: var(--default-transition-duration);
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 300ms;
+  animation-duration: var(--default-transition-duration);
   animation-timing-function: ease;
   mix-blend-mode: normal;
 }

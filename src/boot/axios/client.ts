@@ -10,12 +10,16 @@ type Meta = {
 declare module "axios" {
   export interface AxiosRequestConfig {
     meta?: Partial<Meta>;
+    _retry?: boolean;
   }
 }
 
 const axios = initAxios.create({
   baseURL: `${appConfig.baseUrl}/api`,
 });
+
+// Shared across concurrent 401s so only one refresh request is sent
+let refreshPromise: ReturnType<typeof auth.refreshToken> | null = null;
 
 axios.interceptors.request.use(
   (request) => {
@@ -35,8 +39,12 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const status = error?.response?.status;
-    if (status === 401) {
-      const token = await auth.refreshToken();
+    if (status === 401 && error.config && !error.config._retry) {
+      error.config._retry = true;
+      refreshPromise ??= auth.refreshToken().finally(() => {
+        refreshPromise = null;
+      });
+      const token = await refreshPromise;
       if (token) {
         error.config.headers.set(
           "Authorization",
