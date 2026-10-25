@@ -1,5 +1,5 @@
 import { Icon } from "@/components";
-import { useFormatDate, useFormatPrice } from "@/hooks";
+import { useFormatPrice } from "@/hooks";
 import { Layout } from "@/layouts";
 import { IconName } from "@/types";
 import {
@@ -7,164 +7,117 @@ import {
   Badge,
   Button,
   Card,
-  Divider,
   Progress,
   Stack,
   Table,
   Typography,
 } from "reaxify/components";
 import { cn } from "reaxify/helpers";
-import { Color } from "reaxify/types";
 
-type StatItem = {
-  title: string;
-  value: string;
-  percent: string;
-  icon: IconName;
-  bgClasses: string;
-  colorClasses: string;
-};
-
-type OrderStatus = "completed" | "pending" | "processing" | "cancelled";
-
-const orderStatusMap: Record<OrderStatus, { label: string; color: Color }> = {
-  completed: { label: "Completed", color: "success" },
-  pending: { label: "Pending", color: "warning" },
-  processing: { label: "Processing", color: "info" },
-  cancelled: { label: "Cancelled", color: "danger" },
-};
-
-const stats: StatItem[] = [
+const stats = [
   {
-    title: "Sales",
-    value: "6.5K",
-    percent: "4.5%",
-    icon: "PresentionChart",
-    bgClasses: "bg-light-info",
-    colorClasses: "text-info",
+    title: "Total Employees",
+    value: "248",
+    change: "+12.5%",
+    icon: "Profile2User" as IconName,
+    color: "text-primary",
+    bg: "bg-blue-50",
   },
   {
-    title: "Customers",
-    value: "12K",
-    percent: "7.5%",
-    icon: "Profile2User",
-    bgClasses: "bg-light-warning",
-    colorClasses: "text-warning",
+    title: "Present Today",
+    value: "215",
+    change: "+4.8%",
+    icon: "UserTick" as IconName,
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
   },
   {
-    title: "Products",
-    value: "47K",
-    percent: "8%",
-    icon: "Box",
-    bgClasses: "bg-light-success",
-    colorClasses: "text-success",
+    title: "On Leave",
+    value: "18",
+    change: "-2.4%",
+    icon: "Calendar" as IconName,
+    color: "text-amber-600",
+    bg: "bg-amber-50",
   },
   {
-    title: "Revenue",
-    value: "$128K",
-    percent: "6.69%",
-    icon: "DollarCircle",
-    bgClasses: "bg-light-secondary",
-    colorClasses: "text-secondary",
+    title: "Total Payroll",
+    value: "$84.5K",
+    change: "+6.2%",
+    icon: "Wallet" as IconName,
+    color: "text-violet-600",
+    bg: "bg-violet-50",
   },
 ];
 
-const recentOrders = [
-  {
-    id: "#ORD-1042",
-    customer: "Sarah Johnson",
-    amount: 249.99,
-    date: "2026-06-10T14:30:00",
-    status: "completed" as OrderStatus,
-  },
-  {
-    id: "#ORD-1041",
-    customer: "Michael Chen",
-    amount: 89.5,
-    date: "2026-06-10T11:15:00",
-    status: "processing" as OrderStatus,
-  },
-  {
-    id: "#ORD-1040",
-    customer: "Emma Wilson",
-    amount: 512.0,
-    date: "2026-06-09T18:45:00",
-    status: "pending" as OrderStatus,
-  },
-  {
-    id: "#ORD-1039",
-    customer: "James Rodriguez",
-    amount: 34.99,
-    date: "2026-06-09T09:20:00",
-    status: "completed" as OrderStatus,
-  },
-  {
-    id: "#ORD-1038",
-    customer: "Lisa Anderson",
-    amount: 178.25,
-    date: "2026-06-08T16:00:00",
-    status: "cancelled" as OrderStatus,
-  },
-];
-
-const customers = [
+const employees = [
   {
     name: "Sarah Johnson",
-    email: "sarah.j@email.com",
-    orders: 24,
-    spent: 4820,
-    active: true,
+    role: "Product Designer",
+    department: "Design",
+    date: "Oct 25, 2026",
+    status: "Present",
   },
   {
     name: "Michael Chen",
-    email: "mchen@email.com",
-    orders: 18,
-    spent: 3150,
-    active: true,
+    role: "Frontend Developer",
+    department: "Engineering",
+    date: "Oct 25, 2026",
+    status: "Present",
+  },
+  {
+    name: "Emma Wilson",
+    role: "HR Manager",
+    department: "Human Resources",
+    date: "Oct 25, 2026",
+    status: "On Leave",
   },
   {
     name: "James Rodriguez",
-    email: "j.rodriguez@email.com",
-    orders: 7,
-    spent: 890,
-    active: false,
+    role: "Marketing Specialist",
+    department: "Marketing",
+    date: "Oct 25, 2026",
+    status: "Late",
   },
   {
     name: "Lisa Anderson",
-    email: "lisa.a@email.com",
-    orders: 12,
-    spent: 2100,
-    active: true,
+    role: "Financial Analyst",
+    department: "Finance",
+    date: "Oct 25, 2026",
+    status: "Present",
   },
 ];
 
-const financialReport = [
+const departments = [
+  { name: "Engineering", count: 82, percent: 82, color: "primary" as const },
+  { name: "Design", count: 38, percent: 38, color: "info" as const },
+  { name: "Marketing", count: 56, percent: 56, color: "success" as const },
   {
-    label: "Product Sales",
-    amount: 84200,
-    target: 100000,
-    color: "primary" as Color,
+    name: "Human Resources",
+    count: 24,
+    percent: 24,
+    color: "warning" as const,
   },
-  {
-    label: "Subscriptions",
-    amount: 28600,
-    target: 35000,
-    color: "info" as Color,
-  },
-  {
-    label: "Services",
-    amount: 15400,
-    target: 20000,
-    color: "success" as Color,
-  },
-  { label: "Affiliate", amount: 4200, target: 8000, color: "warning" as Color },
 ];
 
-const topProducts = [
-  { name: "Wireless Headphones", sold: 342, revenue: 27360, trend: 12.4 },
-  { name: "Smart Watch Pro", sold: 218, revenue: 43600, trend: 8.2 },
-  { name: "USB-C Hub", sold: 567, revenue: 17010, trend: -2.1 },
-  { name: "Laptop Stand", sold: 189, revenue: 7560, trend: 5.7 },
+const activities = [
+  {
+    title: "New employee onboarded",
+    description: "Olivia Martinez joined the Design team",
+    time: "10:45 AM",
+    icon: "UserAdd" as IconName,
+  },
+  {
+    title: "Leave request submitted",
+    description: "Michael Chen requested 2 days off",
+    time: "09:30 AM",
+    icon: "Calendar" as IconName,
+  },
+  {
+    title: "Payroll processed",
+    description: "October payroll is ready for review",
+    time: "Yesterday",
+    icon: "Wallet" as IconName,
+  },
 ];
 
 function getInitials(name: string) {
@@ -178,202 +131,146 @@ function getInitials(name: string) {
 
 export default function Home() {
   const formatPrice = useFormatPrice();
-  const formatDate = useFormatDate();
-
-  const totalRevenue = financialReport.reduce(
-    (sum, item) => sum + item.amount,
-    0,
-  );
-  const totalTarget = financialReport.reduce(
-    (sum, item) => sum + item.target,
-    0,
-  );
-  const revenueProgress = Math.round((totalRevenue / totalTarget) * 100);
 
   return (
     <Layout>
-      <Layout.Body className="space-y-6">
-        <Stack className="items-start justify-between gap-4 sm:items-center">
+      <Layout.Body className="min-h-screen space-y-6 p-4 sm:p-6 lg:p-8">
+        {/* Header */}
+        <Stack className="items-center justify-between gap-4">
           <Stack direction="column" className="gap-1">
-            <Typography variant="heading-5">Dashboard</Typography>
+            <Typography variant="heading-4">HR Dashboard</Typography>
             <Typography variant="body-2" className="text-gray-500">
-              Welcome back! Here is what is happening with your store today.
+              Monitor your team and manage your workforce.
             </Typography>
           </Stack>
-          <Button variant="outline" color="dark" size="sm" className="shrink-0">
+
+          {/* <Button color="primary" size="sm">
             <Icon name="Export" className="size-4" />
             Export Report
-          </Button>
+          </Button> */}
         </Stack>
 
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+        {/* Statistics */}
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {stats.map((item) => (
-            <Card key={item.title} className="w-full">
-              <Card.Body className="flex items-start gap-4 p-5">
-                <div className="flex-1">
-                  <Typography variant="body-1">{item.title}</Typography>
-                  <Typography
-                    variant="heading-4"
-                    className={cn("mt-0.5", item.colorClasses)}
+            <Card key={item.title} className="border-0 shadow-sm">
+              <Card.Body className="p-5">
+                <Stack className="items-start justify-between gap-3">
+                  <Stack direction="column" className="min-w-0 gap-3">
+                    <Typography variant="body-2" className="text-gray-500">
+                      {item.title}
+                    </Typography>
+
+                    <Typography variant="heading-3">{item.value}</Typography>
+
+                    <Typography variant="body-3" className="text-emerald-600">
+                      {item.change}{" "}
+                      <span className="text-gray-400">vs last month</span>
+                    </Typography>
+                  </Stack>
+
+                  <div
+                    className={cn(
+                      "flex size-12 shrink-0 items-center justify-center rounded-2xl",
+                      item.bg,
+                    )}
                   >
-                    {item.value}
-                  </Typography>
-                  <Typography
-                    variant="body-1"
-                    className="mt-3 inline-flex items-center text-success"
-                  >
-                    <Icon name="ArrowUp" className="size-4" />
-                    {item.percent}
-                  </Typography>
-                </div>
-                <div
-                  className={cn(
-                    "flex size-12 items-center justify-center rounded-2xl",
-                    item.bgClasses,
-                  )}
-                >
-                  <Icon
-                    name={item.icon}
-                    className={cn("size-6", item.colorClasses)}
-                  />
-                </div>
+                    <Icon
+                      name={item.icon}
+                      className={cn("size-6", item.color)}
+                    />
+                  </div>
+                </Stack>
               </Card.Body>
             </Card>
           ))}
         </section>
 
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-6">
-          <Card className="lg:col-span-3">
-            <Card.Header className="flex items-center justify-between gap-4">
-              <Stack direction="column" className="gap-0.5">
-                <Typography variant="heading-6">Recent Orders</Typography>
+        {/* Main content */}
+        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+          {/* Employee attendance */}
+          <Card className="border-0 shadow-sm xl:col-span-2">
+            <Card.Header className="flex items-center justify-between gap-3">
+              <Stack direction="column" className="gap-1">
+                <Typography variant="heading-6">Employee Attendance</Typography>
                 <Typography variant="body-3" className="text-gray-500">
-                  Latest transactions from your store
+                  Daily attendance overview
                 </Typography>
               </Stack>
-              <Button variant="text" color="primary" size="sm">
-                View all
+
+              <Button variant="outline" color="dark" size="sm">
+                View All
               </Button>
             </Card.Header>
-            <Card.Body className="p-0">
-              <Table.Container>
-                <Table hover striped>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>Order</Table.HeaderCell>
-                      <Table.HeaderCell>Customer</Table.HeaderCell>
-                      <Table.HeaderCell>Amount</Table.HeaderCell>
-                      <Table.HeaderCell>Date</Table.HeaderCell>
-                      <Table.HeaderCell>Status</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {recentOrders.map((order) => {
-                      const status = orderStatusMap[order.status];
-                      return (
-                        <Table.Row key={order.id}>
-                          <Table.DataCell>
-                            <Typography
-                              variant="body-2"
-                              className="font-medium"
-                            >
-                              {order.id}
-                            </Typography>
-                          </Table.DataCell>
-                          <Table.DataCell>{order.customer}</Table.DataCell>
-                          <Table.DataCell>
-                            {formatPrice(order.amount)}
-                          </Table.DataCell>
-                          <Table.DataCell className="text-gray-500">
-                            {formatDate(order.date, "date-time")}
-                          </Table.DataCell>
-                          <Table.DataCell>
-                            <Badge
-                              color={status.color}
-                              variant="soft"
-                              size="sm"
-                            >
-                              {status.label}
-                            </Badge>
-                          </Table.DataCell>
-                        </Table.Row>
-                      );
-                    })}
-                  </Table.Body>
-                </Table>
-              </Table.Container>
-            </Card.Body>
-          </Card>
 
-          <Card className="lg:col-span-2">
-            <Card.Header className="flex items-center justify-between gap-4">
-              <Stack direction="column" className="gap-0.5">
-                <Typography variant="heading-6">Customers</Typography>
-                <Typography variant="body-3" className="text-gray-500">
-                  Your most active buyers
-                </Typography>
-              </Stack>
-              <Avatar.Group>
-                {customers.slice(0, 4).map((customer) => (
-                  <Avatar key={customer.email} size="sm">
-                    <Avatar.Fallback>
-                      {getInitials(customer.name)}
-                    </Avatar.Fallback>
-                  </Avatar>
-                ))}
-                <Avatar size="sm">
-                  <Avatar.Count>+8</Avatar.Count>
-                </Avatar>
-              </Avatar.Group>
-            </Card.Header>
             <Card.Body className="p-0">
               <Table.Container>
                 <Table hover>
                   <Table.Header>
                     <Table.Row>
-                      <Table.HeaderCell>Customer</Table.HeaderCell>
-                      <Table.HeaderCell>Orders</Table.HeaderCell>
-                      <Table.HeaderCell>Total Spent</Table.HeaderCell>
+                      <Table.HeaderCell>Employee</Table.HeaderCell>
+                      <Table.HeaderCell>Department</Table.HeaderCell>
+                      <Table.HeaderCell>Date</Table.HeaderCell>
                       <Table.HeaderCell>Status</Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
+
                   <Table.Body>
-                    {customers.map((customer) => (
-                      <Table.Row key={customer.email}>
+                    {employees.map((employee) => (
+                      <Table.Row key={employee.name}>
                         <Table.DataCell>
                           <Stack className="items-center gap-3">
-                            <Avatar size="sm">
+                            <Avatar size="md">
                               <Avatar.Fallback>
-                                {getInitials(customer.name)}
+                                {getInitials(employee.name)}
                               </Avatar.Fallback>
                             </Avatar>
-                            <Stack direction="column" className="gap-0">
+
+                            <Stack direction="column" className="gap-0.5">
                               <Typography
                                 variant="body-2"
                                 className="font-medium"
                               >
-                                {customer.name}
+                                {employee.name}
                               </Typography>
                               <Typography
                                 variant="body-3"
                                 className="text-gray-500"
                               >
-                                {customer.email}
+                                {employee.role}
                               </Typography>
                             </Stack>
                           </Stack>
                         </Table.DataCell>
-                        <Table.DataCell>{customer.orders}</Table.DataCell>
+
                         <Table.DataCell>
-                          {formatPrice(customer.spent)}
+                          <Typography variant="body-2">
+                            {employee.department}
+                          </Typography>
                         </Table.DataCell>
+
+                        <Table.DataCell>
+                          <Typography
+                            variant="body-2"
+                            className="text-gray-500"
+                          >
+                            {employee.date}
+                          </Typography>
+                        </Table.DataCell>
+
                         <Table.DataCell>
                           <Badge
-                            color={customer.active ? "success" : "danger"}
+                            color={
+                              employee.status === "Present"
+                                ? "success"
+                                : employee.status === "Late"
+                                  ? "warning"
+                                  : "info"
+                            }
                             variant="soft"
                             size="sm"
                           >
-                            {customer.active ? "Active" : "Inactive"}
+                            {employee.status}
                           </Badge>
                         </Table.DataCell>
                       </Table.Row>
@@ -383,165 +280,165 @@ export default function Home() {
               </Table.Container>
             </Card.Body>
           </Card>
-        </section>
 
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-6">
-          <Card className="lg:col-span-3">
+          {/* Departments */}
+          <Card className="border-0 shadow-sm">
             <Card.Header>
-              <Stack direction="column" className="gap-0.5">
-                <Typography variant="heading-6">Financial Report</Typography>
+              <Stack direction="column" className="gap-1">
+                <Typography variant="heading-6">Departments</Typography>
                 <Typography variant="body-3" className="text-gray-500">
-                  Revenue breakdown this month
+                  Employee distribution
                 </Typography>
               </Stack>
             </Card.Header>
-            <Card.Body className="space-y-5">
-              <div className="rounded-xl bg-light-primary p-4">
-                <Stack className="items-start justify-between gap-2">
-                  <Stack direction="column" className="gap-0.5">
-                    <Typography variant="body-2" className="text-gray-600">
-                      Total Revenue
-                    </Typography>
-                    <Typography variant="heading-4" className="text-primary">
-                      {formatPrice(totalRevenue)}
-                    </Typography>
-                  </Stack>
-                  <Badge color="success" variant="soft" size="sm">
-                    <Icon name="ArrowUp" className="size-3" />
-                    {revenueProgress}%
-                  </Badge>
-                </Stack>
-                <Progress
-                  value={revenueProgress}
-                  color="primary"
-                  className="mt-3"
-                />
-                <Typography variant="body-3" className="mt-2 text-gray-500">
-                  Target: {formatPrice(totalTarget)}
-                </Typography>
-              </div>
 
-              <Divider />
-
-              <Stack direction="column" className="gap-4">
-                {financialReport.map((item) => {
-                  const progress = Math.round(
-                    (item.amount / item.target) * 100,
-                  );
-                  return (
-                    <Stack
-                      key={item.label}
-                      direction="column"
-                      className="gap-1.5"
-                    >
-                      <Stack className="items-center justify-between gap-2">
-                        <Typography variant="body-2">{item.label}</Typography>
-                        <Typography variant="body-2" className="font-medium">
-                          {formatPrice(item.amount)}
-                        </Typography>
-                      </Stack>
-                      <Progress value={progress} color={item.color} />
-                    </Stack>
-                  );
-                })}
-              </Stack>
-            </Card.Body>
-            <Card.Footer className="flex items-center justify-between gap-4 border-t">
-              <Stack className="items-center gap-2">
-                <div className="flex size-8 items-center justify-center rounded-lg bg-light-success">
-                  <Icon name="Wallet" className="size-4 text-success" />
-                </div>
-                <Stack direction="column" className="gap-0">
-                  <Typography variant="body-3" className="text-gray-500">
-                    Net Profit
-                  </Typography>
-                  <Typography
-                    variant="body-1"
-                    className="font-medium text-success"
-                  >
-                    {formatPrice(32400)}
-                  </Typography>
-                </Stack>
-              </Stack>
-              <Stack className="items-center gap-2">
-                <div className="flex size-8 items-center justify-center rounded-lg bg-light-danger">
-                  <Icon name="Receipt" className="size-4 text-danger" />
-                </div>
-                <Stack direction="column" className="gap-0">
-                  <Typography variant="body-3" className="text-gray-500">
-                    Expenses
-                  </Typography>
-                  <Typography
-                    variant="body-1"
-                    className="font-medium text-danger"
-                  >
-                    {formatPrice(9800)}
-                  </Typography>
-                </Stack>
-              </Stack>
-            </Card.Footer>
-          </Card>
-          <Card className="lg:col-span-2">
-            <Card.Header>
-              <Stack direction="column" className="gap-0.5">
-                <Typography variant="heading-6">Top Products</Typography>
-                <Typography variant="body-3" className="text-gray-500">
-                  Best sellers this week
-                </Typography>
-              </Stack>
-            </Card.Header>
-            <Card.Body className="space-y-4">
-              {topProducts.map((product, index) => (
+            <Card.Body className="space-y-6">
+              {departments.map((department) => (
                 <Stack
-                  key={product.name}
-                  className="items-center gap-3 animate-card-enter"
+                  key={department.name}
+                  direction="column"
+                  className="gap-2"
                 >
-                  <div
-                    className={cn(
-                      "flex size-9 shrink-0 items-center justify-center rounded-xl text-sm font-semibold",
-                      index === 0
-                        ? "bg-light-warning text-warning"
-                        : "bg-gray-100 text-gray-600",
-                    )}
-                  >
-                    {index + 1}
-                  </div>
-                  <Stack direction="column" className="min-w-0 flex-1 gap-0">
-                    <Typography
-                      variant="body-2"
-                      className="truncate font-medium"
-                    >
-                      {product.name}
-                    </Typography>
-                    <Typography variant="body-3" className="text-gray-500">
-                      {product.sold} sold · {formatPrice(product.revenue)}
+                  <Stack className="items-center justify-between gap-2">
+                    <Typography variant="body-2">{department.name}</Typography>
+                    <Typography variant="body-2" className="font-medium">
+                      {department.count}
                     </Typography>
                   </Stack>
-                  <Typography
-                    variant="body-3"
-                    className={cn(
-                      "inline-flex shrink-0 items-center gap-0.5 font-medium",
-                      product.trend >= 0 ? "text-success" : "text-danger",
-                    )}
-                  >
-                    <Icon
-                      name={product.trend >= 0 ? "ArrowUp" : "ArrowDown"}
-                      className="size-3"
-                    />
-                    {Math.abs(product.trend)}%
-                  </Typography>
+
+                  <Progress
+                    value={department.percent}
+                    color={department.color}
+                  />
                 </Stack>
               ))}
-            </Card.Body>
-            <Card.Footer className="border-t">
+
               <Button
                 variant="soft"
                 color="primary"
                 className="w-full"
                 size="sm"
               >
-                <Icon name="Chart" className="size-4" />
-                View Analytics
+                <Icon name="Profile2User" className="size-4" />
+                Manage Departments
+              </Button>
+            </Card.Body>
+          </Card>
+        </section>
+
+        {/* Bottom content */}
+        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+          {/* Payroll */}
+          <Card className="border-0 shadow-sm xl:col-span-2">
+            <Card.Header className="flex items-center justify-between gap-3">
+              <Stack direction="column" className="gap-1">
+                <Typography variant="heading-6">Payroll Overview</Typography>
+                <Typography variant="body-3" className="text-gray-500">
+                  October 2026
+                </Typography>
+              </Stack>
+
+              <Badge color="success" variant="soft">
+                Processed
+              </Badge>
+            </Card.Header>
+
+            <Card.Body className="space-y-5">
+              <div className="rounded-2xl bg-[#EEF2FF] p-5">
+                <Typography variant="body-2" className="text-gray-500">
+                  Total payroll
+                </Typography>
+
+                <Typography variant="heading-3" className="mt-2 text-primary">
+                  {formatPrice(84500)}
+                </Typography>
+
+                <Stack className="mt-4 items-center justify-between gap-2">
+                  <Typography variant="body-3" className="text-gray-500">
+                    Monthly budget
+                  </Typography>
+                  <Typography variant="body-3" className="font-medium">
+                    {formatPrice(100000)}
+                  </Typography>
+                </Stack>
+
+                <Progress value={84.5} color="primary" className="mt-2" />
+
+                <Typography variant="body-3" className="mt-2 text-gray-500">
+                  84.5% of the monthly budget
+                </Typography>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-gray-100 p-4">
+                  <Typography variant="body-3" className="text-gray-500">
+                    Average salary
+                  </Typography>
+                  <Typography variant="heading-5" className="mt-2">
+                    {formatPrice(3407)}
+                  </Typography>
+                </div>
+
+                <div className="rounded-xl border border-gray-100 p-4">
+                  <Typography variant="body-3" className="text-gray-500">
+                    Pending payments
+                  </Typography>
+                  <Typography variant="heading-5" className="mt-2">
+                    {formatPrice(6200)}
+                  </Typography>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+
+          {/* Recent activity */}
+          <Card className="border-0 shadow-sm">
+            <Card.Header>
+              <Stack direction="column" className="gap-1">
+                <Typography variant="heading-6">Recent Activity</Typography>
+                <Typography variant="body-3" className="text-gray-500">
+                  Latest updates from your team
+                </Typography>
+              </Stack>
+            </Card.Header>
+
+            <Card.Body>
+              <Stack direction="column" className="gap-5">
+                {activities.map((activity) => (
+                  <Stack key={activity.title} className="items-start gap-3">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gray-100">
+                      <Icon
+                        name={activity.icon}
+                        className="size-5 text-gray-600"
+                      />
+                    </div>
+
+                    <Stack direction="column" className="min-w-0 flex-1 gap-1">
+                      <Typography variant="body-2" className="font-medium">
+                        {activity.title}
+                      </Typography>
+
+                      <Typography variant="body-3" className="text-gray-500">
+                        {activity.description}
+                      </Typography>
+
+                      <Typography variant="body-3" className="text-gray-400">
+                        {activity.time}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                ))}
+              </Stack>
+            </Card.Body>
+
+            <Card.Footer className="border-t">
+              <Button
+                variant="text"
+                color="primary"
+                className="w-full"
+                size="sm"
+              >
+                View All Activities
               </Button>
             </Card.Footer>
           </Card>

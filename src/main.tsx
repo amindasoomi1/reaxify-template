@@ -26,40 +26,40 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ThemeProvider
         extendClasses={{
           table: { body: { base: "*:animate-card-enter" } },
-          card: { base: "shadow-soft" },
-          button: {
-            color: {
-              primary: {
-                solid:
-                  "ring-2 ring-transparent ring-offset-2 focus:ring-primary",
-              },
-              secondary: {
-                solid:
-                  "ring-2 ring-transparent ring-offset-2 focus:ring-secondary",
-              },
-              info: {
-                solid: "ring-2 ring-transparent ring-offset-2 focus:ring-info",
-              },
-              success: {
-                solid:
-                  "ring-2 ring-transparent ring-offset-2 focus:ring-success",
-              },
-              warning: {
-                solid:
-                  "ring-2 ring-transparent ring-offset-2 focus:ring-warning",
-              },
-              danger: {
-                solid:
-                  "ring-2 ring-transparent ring-offset-2 focus:ring-danger",
-              },
-              dark: {
-                solid: "ring-2 ring-transparent ring-offset-2 focus:ring-dark",
-              },
-              light: {
-                solid: "ring-2 ring-transparent ring-offset-2 focus:ring-light",
-              },
-            },
-          },
+          card: { base: "animate-card-enter shadow-soft glass-card" },
+          // button: {
+          //   color: {
+          //     primary: {
+          //       solid:
+          //         "ring-2 ring-transparent ring-offset-2 focus:ring-primary",
+          //     },
+          //     secondary: {
+          //       solid:
+          //         "ring-2 ring-transparent ring-offset-2 focus:ring-secondary",
+          //     },
+          //     info: {
+          //       solid: "ring-2 ring-transparent ring-offset-2 focus:ring-info",
+          //     },
+          //     success: {
+          //       solid:
+          //         "ring-2 ring-transparent ring-offset-2 focus:ring-success",
+          //     },
+          //     warning: {
+          //       solid:
+          //         "ring-2 ring-transparent ring-offset-2 focus:ring-warning",
+          //     },
+          //     danger: {
+          //       solid:
+          //         "ring-2 ring-transparent ring-offset-2 focus:ring-danger",
+          //     },
+          //     dark: {
+          //       solid: "ring-2 ring-transparent ring-offset-2 focus:ring-dark",
+          //     },
+          //     light: {
+          //       solid: "ring-2 ring-transparent ring-offset-2 focus:ring-light",
+          //     },
+          //   },
+          // },
         }}
       >
         <QueryClientProvider client={queryClient}>
