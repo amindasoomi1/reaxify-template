@@ -55,8 +55,8 @@
 
   --radius-card: 1rem;
 
-  --animate-card-enter: card-enter 300ms calc(mod(sibling-index(), 25) * 125ms)
-    ease-out both;
+  --animate-card-enter: card-enter 300ms
+    calc(mod(sibling-index(), 25) * 125 * 1ms) ease-out both;
 
   --default-transition-duration: 300ms;
 }
