@@ -14,11 +14,9 @@ const routes = createBrowserRouter([
       {
         path: "",
         element: <MainLayout />,
-        children: [
-          { path: "", element: <Home /> },
-          { path: "onboarding", element: <Onboarding /> },
-        ],
+        children: [{ path: "", element: <Home /> }],
       },
+      { path: "onboarding", element: <Onboarding /> },
       { path: "login", element: <Login /> },
       { path: "*", element: <PageNotFound /> },
     ],

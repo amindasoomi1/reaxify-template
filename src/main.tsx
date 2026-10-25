@@ -25,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <I18nextProvider i18n={i18n}>
       <ThemeProvider
         extendClasses={{
+          table: { body: { base: "*:animate-card-enter" } },
           card: { base: "shadow-soft" },
           button: {
             color: {

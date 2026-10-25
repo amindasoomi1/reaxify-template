@@ -306,6 +306,87 @@ export default function Home() {
           </Card>
 
           <Card className="lg:col-span-2">
+            <Card.Header className="flex items-center justify-between gap-4">
+              <Stack direction="column" className="gap-0.5">
+                <Typography variant="heading-6">Customers</Typography>
+                <Typography variant="body-3" className="text-gray-500">
+                  Your most active buyers
+                </Typography>
+              </Stack>
+              <Avatar.Group>
+                {customers.slice(0, 4).map((customer) => (
+                  <Avatar key={customer.email} size="sm">
+                    <Avatar.Fallback>
+                      {getInitials(customer.name)}
+                    </Avatar.Fallback>
+                  </Avatar>
+                ))}
+                <Avatar size="sm">
+                  <Avatar.Count>+8</Avatar.Count>
+                </Avatar>
+              </Avatar.Group>
+            </Card.Header>
+            <Card.Body className="p-0">
+              <Table.Container>
+                <Table hover>
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell>Customer</Table.HeaderCell>
+                      <Table.HeaderCell>Orders</Table.HeaderCell>
+                      <Table.HeaderCell>Total Spent</Table.HeaderCell>
+                      <Table.HeaderCell>Status</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {customers.map((customer) => (
+                      <Table.Row key={customer.email}>
+                        <Table.DataCell>
+                          <Stack className="items-center gap-3">
+                            <Avatar size="sm">
+                              <Avatar.Fallback>
+                                {getInitials(customer.name)}
+                              </Avatar.Fallback>
+                            </Avatar>
+                            <Stack direction="column" className="gap-0">
+                              <Typography
+                                variant="body-2"
+                                className="font-medium"
+                              >
+                                {customer.name}
+                              </Typography>
+                              <Typography
+                                variant="body-3"
+                                className="text-gray-500"
+                              >
+                                {customer.email}
+                              </Typography>
+                            </Stack>
+                          </Stack>
+                        </Table.DataCell>
+                        <Table.DataCell>{customer.orders}</Table.DataCell>
+                        <Table.DataCell>
+                          {formatPrice(customer.spent)}
+                        </Table.DataCell>
+                        <Table.DataCell>
+                          <Badge
+                            color={customer.active ? "success" : "danger"}
+                            variant="soft"
+                            size="sm"
+                          >
+                            {customer.active ? "Active" : "Inactive"}
+                          </Badge>
+                        </Table.DataCell>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>
+              </Table.Container>
+            </Card.Body>
+          </Card>
+        </section>
+
+        <section className="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-6">
+          <Card className="lg:col-span-3">
             <Card.Header>
               <Stack direction="column" className="gap-0.5">
                 <Typography variant="heading-6">Financial Report</Typography>
@@ -400,88 +481,6 @@ export default function Home() {
               </Stack>
             </Card.Footer>
           </Card>
-        </section>
-
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-6">
-          <Card className="lg:col-span-3">
-            <Card.Header className="flex items-center justify-between gap-4">
-              <Stack direction="column" className="gap-0.5">
-                <Typography variant="heading-6">Customers</Typography>
-                <Typography variant="body-3" className="text-gray-500">
-                  Your most active buyers
-                </Typography>
-              </Stack>
-              <Avatar.Group>
-                {customers.slice(0, 4).map((customer) => (
-                  <Avatar key={customer.email} size="sm">
-                    <Avatar.Fallback>
-                      {getInitials(customer.name)}
-                    </Avatar.Fallback>
-                  </Avatar>
-                ))}
-                <Avatar size="sm">
-                  <Avatar.Count>+8</Avatar.Count>
-                </Avatar>
-              </Avatar.Group>
-            </Card.Header>
-            <Card.Body className="p-0">
-              <Table.Container>
-                <Table hover>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>Customer</Table.HeaderCell>
-                      <Table.HeaderCell>Orders</Table.HeaderCell>
-                      <Table.HeaderCell>Total Spent</Table.HeaderCell>
-                      <Table.HeaderCell>Status</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {customers.map((customer) => (
-                      <Table.Row key={customer.email}>
-                        <Table.DataCell>
-                          <Stack className="items-center gap-3">
-                            <Avatar size="sm">
-                              <Avatar.Fallback>
-                                {getInitials(customer.name)}
-                              </Avatar.Fallback>
-                            </Avatar>
-                            <Stack direction="column" className="gap-0">
-                              <Typography
-                                variant="body-2"
-                                className="font-medium"
-                              >
-                                {customer.name}
-                              </Typography>
-                              <Typography
-                                variant="body-3"
-                                className="text-gray-500"
-                              >
-                                {customer.email}
-                              </Typography>
-                            </Stack>
-                          </Stack>
-                        </Table.DataCell>
-                        <Table.DataCell>{customer.orders}</Table.DataCell>
-                        <Table.DataCell>
-                          {formatPrice(customer.spent)}
-                        </Table.DataCell>
-                        <Table.DataCell>
-                          <Badge
-                            color={customer.active ? "success" : "danger"}
-                            variant="soft"
-                            size="sm"
-                          >
-                            {customer.active ? "Active" : "Inactive"}
-                          </Badge>
-                        </Table.DataCell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-              </Table.Container>
-            </Card.Body>
-          </Card>
-
           <Card className="lg:col-span-2">
             <Card.Header>
               <Stack direction="column" className="gap-0.5">

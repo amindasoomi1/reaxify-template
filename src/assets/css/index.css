@@ -52,9 +52,21 @@
 
   --shadow-soft: #919eab33 0px 0px 2px 0px, #919eab1f 0px 12px 24px -4px;
 
+  --animate-card-enter: card-enter 300ms
+    calc(mod(sibling-index(), 25) * 125 * 1ms) ease-out both;
+
   --default-transition-duration: 300ms;
 }
-
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-0.75rem, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
 html,
 body {
   --main-height: calc(100vh - 4rem);

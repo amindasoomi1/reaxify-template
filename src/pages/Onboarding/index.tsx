@@ -1,5 +1,6 @@
 import { Icon } from "@/components";
 import { useObjectState, useStepper } from "@/hooks";
+import { ViewTransition, viewTransitionName } from "@/infra/view-transition";
 import { Layout } from "@/layouts";
 import { IconName } from "@/types";
 import {
@@ -209,79 +210,85 @@ export default function Onboarding() {
             })}
           </nav>
         </Stack>
+        <ViewTransition name={viewTransitionName.register.form}>
+          <Card
+            as={Form}
+            onSubmit={stepActions.next}
+            className="w-full min-h-125 max-w-md flex flex-col *:data-[name='card-body']:flex-1"
+          >
+            <Card.Header className="space-y-4">
+              <Stack className="items-start gap-4">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                  <Icon
+                    name={activeStep.icon}
+                    className="size-5 text-primary"
+                  />
+                </div>
+                <Stack direction="column" className="gap-1">
+                  <Typography variant="heading-5" className="text-gray-700">
+                    {activeStep.subtitle}
+                  </Typography>
+                  <Typography variant="body-2" className="text-gray-500">
+                    {activeStep.description}
+                  </Typography>
+                </Stack>
+              </Stack>
+              <Progress value={stepStatus.progress} className="w-full" />
+            </Card.Header>
 
-        <Card
-          as={Form}
-          onSubmit={stepActions.next}
-          className="w-full min-h-125 max-w-md flex flex-col *:data-[name='card-body']:flex-1"
-        >
-          <Card.Header className="space-y-4">
-            <Stack className="items-start gap-4">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                <Icon name={activeStep.icon} className="size-5 text-primary" />
-              </div>
-              <Stack direction="column" className="gap-1">
-                <Typography variant="heading-5" className="text-gray-700">
-                  {activeStep.subtitle}
-                </Typography>
-                <Typography variant="body-2" className="text-gray-500">
-                  {activeStep.description}
+            <OnboardingContext.Provider
+              value={{ data, setData, handleSetData }}
+            >
+              {createElement(activeStep.component ?? Fragment)}
+            </OnboardingContext.Provider>
+
+            <Card.Footer className="flex flex-col gap-4 border-t">
+              <Button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2"
+                size="lg"
+              >
+                {continueLabel}
+                {stepStatus.isLastStep ? (
+                  <Icon name="TickCircle" className="size-5" />
+                ) : (
+                  <Icon name="ArrowRight" className="size-5" />
+                )}
+              </Button>
+
+              <Stack className="items-center justify-between gap-4">
+                {!stepStatus.isFirstStep ? (
+                  <Button
+                    type="button"
+                    variant="text"
+                    color="dark"
+                    size="sm"
+                    className="inline-flex items-center gap-1 shadow-none"
+                    onClick={stepActions.prev}
+                  >
+                    <Icon name="ArrowLeft" className="size-4" />
+                    Back
+                  </Button>
+                ) : (
+                  <Button
+                    as={Link}
+                    to="/login"
+                    variant="text"
+                    color="dark"
+                    size="sm"
+                    className="inline-flex items-center gap-1 shadow-none"
+                  >
+                    <Icon name="Login" className="size-4" />
+                    Sign in instead
+                  </Button>
+                )}
+                <Typography variant="body-3" className="text-gray-400">
+                  {stepStatus.currentIndex + 1} / {stepStatus.totalSteps}
                 </Typography>
               </Stack>
-            </Stack>
-            <Progress value={stepStatus.progress} className="w-full" />
-          </Card.Header>
-
-          <OnboardingContext.Provider value={{ data, setData, handleSetData }}>
-            {createElement(activeStep.component ?? Fragment)}
-          </OnboardingContext.Provider>
-
-          <Card.Footer className="flex flex-col gap-4 border-t">
-            <Button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2"
-              size="lg"
-            >
-              {continueLabel}
-              {stepStatus.isLastStep ? (
-                <Icon name="TickCircle" className="size-5" />
-              ) : (
-                <Icon name="ArrowRight" className="size-5" />
-              )}
-            </Button>
-
-            <Stack className="items-center justify-between gap-4">
-              {!stepStatus.isFirstStep ? (
-                <Button
-                  type="button"
-                  variant="text"
-                  color="dark"
-                  size="sm"
-                  className="inline-flex items-center gap-1 shadow-none"
-                  onClick={stepActions.prev}
-                >
-                  <Icon name="ArrowLeft" className="size-4" />
-                  Back
-                </Button>
-              ) : (
-                <Button
-                  as={Link}
-                  to="/login"
-                  variant="text"
-                  color="dark"
-                  size="sm"
-                  className="inline-flex items-center gap-1 shadow-none"
-                >
-                  <Icon name="Login" className="size-4" />
-                  Sign in instead
-                </Button>
-              )}
-              <Typography variant="body-3" className="text-gray-400">
-                {stepStatus.currentIndex + 1} / {stepStatus.totalSteps}
-              </Typography>
-            </Stack>
-          </Card.Footer>
-        </Card>
+            </Card.Footer>
+          </Card>
+        </ViewTransition>
       </Layout.Body>
     </Layout>
   );

@@ -2,6 +2,7 @@ import { auth } from "@/apis";
 import { Icon, Logo, Textfield } from "@/components";
 import { appConfig, rules } from "@/constants";
 import { useObjectState } from "@/hooks";
+import { ViewTransition, viewTransitionName } from "@/infra/view-transition";
 import { Layout } from "@/layouts";
 import { IconName } from "@/types";
 import { useMutation } from "@tanstack/react-query";
@@ -250,144 +251,147 @@ export default function Login() {
               ))}
             </div>
           </Stack>
+          <ViewTransition name={viewTransitionName.register.form}>
+            <Card as={Form} onSubmit={submit} className="w-full max-w-md">
+              <Card.Header className="hidden space-y-4 lg:block">
+                <Stack direction="column" className="gap-1">
+                  <Typography variant="heading-5" className="text-gray-700">
+                    Sign in
+                  </Typography>
+                  <Typography className="text-gray-500">
+                    Enter your credentials to access your account
+                  </Typography>
+                </Stack>
+              </Card.Header>
 
-          <Card as={Form} onSubmit={submit} className="w-full max-w-md">
-            <Card.Header className="hidden space-y-4 lg:block">
-              <Stack direction="column" className="gap-1">
-                <Typography variant="heading-5" className="text-gray-700">
-                  Sign in
-                </Typography>
-                <Typography className="text-gray-500">
-                  Enter your credentials to access your account
-                </Typography>
-              </Stack>
-            </Card.Header>
+              <Card.Body className="space-y-5">
+                <Alert variant="soft" color="info">
+                  <Alert.Icon>
+                    <Icon name="InfoCircle" className="size-5" />
+                  </Alert.Icon>
+                  <Alert.Content>
+                    <Alert.Title>Secure login</Alert.Title>
+                    <Alert.Description>
+                      Your session is protected with end-to-end encryption.
+                    </Alert.Description>
+                  </Alert.Content>
+                </Alert>
 
-            <Card.Body className="space-y-5">
-              <Alert variant="soft" color="info">
-                <Alert.Icon>
-                  <Icon name="InfoCircle" className="size-5" />
-                </Alert.Icon>
-                <Alert.Content>
-                  <Alert.Title>Secure login</Alert.Title>
-                  <Alert.Description>
-                    Your session is protected with end-to-end encryption.
-                  </Alert.Description>
-                </Alert.Content>
-              </Alert>
-
-              <Textfield
-                label="Email"
-                value={data.email}
-                setValue={handleSetData("email")}
-                rules={rules.email}
-                required
-                type="email"
-                autoFocus
-                prepend={<Icon name="Sms" className="size-4 text-gray-400" />}
-                placeholder="you@company.com"
-              />
-              <Stack direction="column" className="gap-2">
                 <Textfield
-                  label="Password"
-                  value={data.password}
-                  setValue={handleSetData("password")}
+                  label="Email"
+                  value={data.email}
+                  setValue={handleSetData("email")}
+                  rules={rules.email}
                   required
-                  type="password"
-                  prepend={
-                    <Icon name="Lock" className="size-4 text-gray-400" />
-                  }
-                  placeholder="Enter your password"
+                  type="email"
+                  autoFocus
+                  prepend={<Icon name="Sms" className="size-4 text-gray-400" />}
+                  placeholder="you@company.com"
                 />
-                <Stack className="items-center justify-between gap-4">
-                  <label className="inline-flex cursor-pointer items-center gap-2">
-                    <Switch
-                      checked={rememberMe}
-                      onChange={setRememberMe}
-                      size="sm"
+                <Stack direction="column" className="gap-2">
+                  <Textfield
+                    label="Password"
+                    value={data.password}
+                    setValue={handleSetData("password")}
+                    required
+                    type="password"
+                    prepend={
+                      <Icon name="Lock" className="size-4 text-gray-400" />
+                    }
+                    placeholder="Enter your password"
+                  />
+                  <Stack className="items-center justify-between gap-4">
+                    <label className="inline-flex cursor-pointer items-center gap-2">
+                      <Switch
+                        checked={rememberMe}
+                        onChange={setRememberMe}
+                        size="sm"
+                        color="primary"
+                      />
+                      <Typography variant="body-2" className="text-gray-600">
+                        Remember me
+                      </Typography>
+                    </label>
+                    <Button
+                      type="button"
+                      variant="text"
                       color="primary"
-                    />
-                    <Typography variant="body-2" className="text-gray-600">
-                      Remember me
-                    </Typography>
-                  </label>
+                      size="sm"
+                      className="shadow-none"
+                    >
+                      Forgot password?
+                    </Button>
+                  </Stack>
+                </Stack>
+
+                <Button
+                  type="submit"
+                  className="w-full"
+                  size="lg"
+                  loading={isPending}
+                >
+                  <Icon name="Login" className="size-5" />
+                  Sign in
+                </Button>
+
+                <Stack className="items-center gap-3">
+                  <Divider className="flex-1" />
+                  <Typography
+                    variant="body-3"
+                    className="shrink-0 text-gray-400"
+                  >
+                    or continue with
+                  </Typography>
+                  <Divider className="flex-1" />
+                </Stack>
+
+                <div className="grid grid-cols-3 gap-3">
+                  {socialProviders.map((provider) => (
+                    <Button
+                      key={provider.label}
+                      type="button"
+                      variant="outline"
+                      color="dark"
+                      size="sm"
+                      className="w-full"
+                    >
+                      <Icon name={provider.icon} className="size-4" />
+                      <span className="hidden sm:inline">{provider.label}</span>
+                    </Button>
+                  ))}
+                </div>
+              </Card.Body>
+
+              <Card.Footer className="flex flex-col gap-4 border-t">
+                <Stack className="items-center justify-center gap-1">
+                  <Typography variant="body-2" className="text-gray-500">
+                    Don&apos;t have an account?
+                  </Typography>
                   <Button
-                    type="button"
+                    as={Link}
+                    to="/onboarding"
                     variant="text"
                     color="primary"
                     size="sm"
                     className="shadow-none"
                   >
-                    Forgot password?
+                    Create account
                   </Button>
                 </Stack>
-              </Stack>
 
-              <Button
-                type="submit"
-                className="w-full"
-                size="lg"
-                loading={isPending}
-              >
-                <Icon name="Login" className="size-5" />
-                Sign in
-              </Button>
-
-              <Stack className="items-center gap-3">
-                <Divider className="flex-1" />
-                <Typography variant="body-3" className="shrink-0 text-gray-400">
-                  or continue with
-                </Typography>
-                <Divider className="flex-1" />
-              </Stack>
-
-              <div className="grid grid-cols-3 gap-3">
-                {socialProviders.map((provider) => (
-                  <Button
-                    key={provider.label}
-                    type="button"
-                    variant="outline"
-                    color="dark"
-                    size="sm"
-                    className="w-full"
-                  >
-                    <Icon name={provider.icon} className="size-4" />
-                    <span className="hidden sm:inline">{provider.label}</span>
-                  </Button>
-                ))}
-              </div>
-            </Card.Body>
-
-            <Card.Footer className="flex flex-col gap-4 border-t">
-              <Stack className="items-center justify-center gap-1">
-                <Typography variant="body-2" className="text-gray-500">
-                  Don&apos;t have an account?
-                </Typography>
-                <Button
-                  as={Link}
-                  to="/onboarding"
-                  variant="text"
-                  color="primary"
-                  size="sm"
-                  className="shadow-none"
-                >
-                  Create account
-                </Button>
-              </Stack>
-
-              <Stack className="items-center justify-center gap-2">
-                <Badge color="success" variant="soft" size="sm">
-                  <Icon name="ShieldTick" className="size-3" />
-                  SSL Secured
-                </Badge>
-                <Badge color="info" variant="soft" size="sm">
-                  <Icon name="Clock" className="size-3" />
-                  24/7 Support
-                </Badge>
-              </Stack>
-            </Card.Footer>
-          </Card>
-
+                <Stack className="items-center justify-center gap-2">
+                  <Badge color="success" variant="soft" size="sm">
+                    <Icon name="ShieldTick" className="size-3" />
+                    SSL Secured
+                  </Badge>
+                  <Badge color="info" variant="soft" size="sm">
+                    <Icon name="Clock" className="size-3" />
+                    24/7 Support
+                  </Badge>
+                </Stack>
+              </Card.Footer>
+            </Card>
+          </ViewTransition>
           <Typography
             variant="body-3"
             className="mt-6 text-center text-gray-400"
