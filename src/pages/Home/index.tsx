@@ -492,7 +492,10 @@ export default function Home() {
             </Card.Header>
             <Card.Body className="space-y-4">
               {topProducts.map((product, index) => (
-                <Stack key={product.name} className="items-center gap-3">
+                <Stack
+                  key={product.name}
+                  className="items-center gap-3 animate-card-enter"
+                >
                   <div
                     className={cn(
                       "flex size-9 shrink-0 items-center justify-center rounded-xl text-sm font-semibold",
