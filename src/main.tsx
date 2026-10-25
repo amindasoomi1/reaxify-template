@@ -26,7 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ThemeProvider
         extendClasses={{
           table: { body: { base: "*:animate-card-enter" } },
-          card: { base: "animate-card-enter shadow-soft glass-card" },
+          card: { base: "shadow-soft" },
           // button: {
           //   color: {
           //     primary: {

@@ -58,7 +58,7 @@
   --animate-card-enter: card-enter 300ms calc(mod(sibling-index(), 25) * 125ms)
     ease-out both;
 
-  --default-transition-duration: 200ms;
+  --default-transition-duration: 300ms;
 }
 
 @keyframes card-enter {

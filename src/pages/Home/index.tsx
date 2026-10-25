@@ -153,7 +153,7 @@ export default function Home() {
         {/* Statistics */}
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {stats.map((item) => (
-            <Card key={item.title} className="border-0 shadow-sm">
+            <Card key={item.title} className="animate-card-enter glass-card">
               <Card.Body className="p-5">
                 <Stack className="items-start justify-between gap-3">
                   <Stack direction="column" className="min-w-0 gap-3">
@@ -189,7 +189,7 @@ export default function Home() {
         {/* Main content */}
         <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
           {/* Employee attendance */}
-          <Card className="border-0 shadow-sm xl:col-span-2">
+          <Card className="animate-card-enter glass-card xl:col-span-2">
             <Card.Header className="flex items-center justify-between gap-3">
               <Stack direction="column" className="gap-1">
                 <Typography variant="heading-6">Employee Attendance</Typography>
@@ -282,7 +282,7 @@ export default function Home() {
           </Card>
 
           {/* Departments */}
-          <Card className="border-0 shadow-sm">
+          <Card className="animate-card-enter glass-card">
             <Card.Header>
               <Stack direction="column" className="gap-1">
                 <Typography variant="heading-6">Departments</Typography>
@@ -329,7 +329,7 @@ export default function Home() {
         {/* Bottom content */}
         <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
           {/* Payroll */}
-          <Card className="border-0 shadow-sm xl:col-span-2">
+          <Card className="animate-card-enter glass-card xl:col-span-2">
             <Card.Header className="flex items-center justify-between gap-3">
               <Stack direction="column" className="gap-1">
                 <Typography variant="heading-6">Payroll Overview</Typography>
@@ -392,7 +392,7 @@ export default function Home() {
           </Card>
 
           {/* Recent activity */}
-          <Card className="border-0 shadow-sm">
+          <Card className="animate-card-enter glass-card">
             <Card.Header>
               <Stack direction="column" className="gap-1">
                 <Typography variant="heading-6">Recent Activity</Typography>
